@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+body {
+	font-family: 'Muli';
+	font-weight: 300;
+};
+
+.big-button{
+	background-color: #F6CBA7;
+	text-align: center;
+	padding: 12px;
+	margin: 2px;
+	border-radius: 4px;
+}
+.navbar-custom {
+    background-color: #F7AF7C;
+}
+
+.landing-title{
+	margin-top: 20%
+
+}
+
+.profile-image {
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	background-color: #F6CBA7;
+	margin-top: 25px;
+	margin-bottom: 0px;
+	margin-left: 20px;
+}
+
+.profile-text {
+	margin: 25px;
+	font-size: 50px;
+}
+
+.basic-info {
+	display: flex;
+}
+
+.info-cols {
+	display: flex;
+}
+
+.card {
+	margin: 25px;
+	width: 400px;
+	height: 500px;
+	border-radius: 20px;
+	text-align: center;
+	background-color: grey;
+	font-size: 20px;
+}
+
+.follow-button {
+	background-color: grey;
+	border-radius: 30px;
+	padding: 10px;
+	margin: 25px;
+	height: 45px;
+	text-align: center;
+}
+
+.divider {
+	width: 500px;
+}
+
+
+
