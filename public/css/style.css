@@ -1,0 +1,20 @@
+.container {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  justify-content: space-around;
+   align-items: center; 
+}
+.big-button{
+	background-color: #F6CBA7;
+	text-align: center;
+	padding: 12px;
+	margin: 2px;
+	border-radius: 4px;
+}
+.navbar-custom {
+    background-color: #F7AF7C;
+}
+.landing-title{
+	margin-top: 20%
+
+}
