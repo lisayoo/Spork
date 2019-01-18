@@ -5,13 +5,20 @@ body {
 	background-color: #F9EDD4;
 }
 
+
+/* general purpose */
+.flex-container {
+	display: flex;
+}
+
 .container {
-  display: flex; /* or inline-flex */
+  display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center; 
   margin:auto;
 }
+
 .big-button{
 	background-color: #F6CBA7;
 	text-align: center;
@@ -46,6 +53,15 @@ body {
 }
 
 
+}
+
+.center {
+  margin: auto;
+}
+
+
+
+/* navbar classes */
 .navbar-custom {
     background-color: #F7AF7C;
 }
@@ -54,6 +70,16 @@ body {
 	margin-left: 5%;
 	font-weight:bold;
 }
+.profile-icon {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background-color: grey;
+}
+
+
+
+/* landing page classes */
 .landing-heading{
 	margin-bottom:1%;
 	text-align: center;
@@ -64,10 +90,129 @@ body {
 	margin-left: auto
 }
 .landing-title{
-	margin-top: 10%;
+	margin-top: 5%;
 	text-align: center;
 	font-size: 100px;
 	color: #485863;
 	font-weight:bold;
 
+}
+
+
+
+/* profile page classes */
+.profile-image {
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	background-color: #F6CBA7;
+	margin-top: 25px;
+	margin-bottom: 0px;
+	margin-left: 20px;
+}
+
+.profile-text {
+	margin: 25px;
+	font-size: 50px;
+}
+
+.card {
+	margin: 25px;
+	width: 400px;
+	height: 500px;
+	border-radius: 20px;
+	text-align: center;
+	background-color: #cbbeb5;
+	font-size: 20px;
+	border: none;
+}
+
+.follow-button {
+	margin-top: 50px;
+	margin: 20px;
+	height: 50px;
+}
+
+.divider {
+	width: 500px;
+}
+
+
+
+/* add recipe page */
+.recipe-container {
+	width: 800px;
+	height: auto;
+	background-color: #F6CBA7;
+	margin: auto;
+	margin-top: 50px;
+	padding: 50px;
+}
+
+input[type=title-text] {
+	background-color: #F6CBA7;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+	border: none;
+	/*border-bottom: 2px solid grey;*/
+	width: auto;
+	font-size: 40px;
+}
+
+textarea {
+	width: 100%;
+	height: 150px;
+	padding: 12px 20px;
+	box-sizing: border-box;
+	border: 2px solid grey;
+	border-radius: 20px;
+	background-color: #F6CBA7;
+	font-size: 16px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+input[type=file] {
+	border: 2px solid grey;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+/*input[type=text1]:focus {
+	width: 500px;
+}*/
+
+/* login page */
+input[type=text2] {
+	background-color: #F6CBA7;
+	border: none;
+	border-bottom: 2px solid grey;
+	width: 200px;
+}
+
+input[type=password] {
+	background-color: #F6CBA7;
+	border: none;
+	border-bottom: 2px solid grey;
+	width: 200px;
+}
+
+.login-button {
+	background-color: #F7AF7C;
+	margin: 50px;
+	margin-bottom: 50px;
+}
+
+.login-container {
+	width: 500px;
+	height: 200px;
+	background-color: #F6CBA7;
+	margin: auto;
+	margin-top: 50px;
+	padding: 10px;
+	border-radius: 50px;
+}
+
+.divider1 { 
+	width: 60px;
 }
