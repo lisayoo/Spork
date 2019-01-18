@@ -22,7 +22,7 @@ body {
 	background-color: #F6CBA7;
 	text-align: center;
 	padding: 12px;
-	margin: 2px;
+	margin: 5px;
 	border-radius: 4px;
 	text-decoration: none;
 	color:#485863;
@@ -38,7 +38,6 @@ body {
 }
 
 
-
 /* navbar classes */
 .navbar-custom {
     background-color: #F7AF7C;
@@ -47,6 +46,7 @@ body {
 	color:#F9EDD4;
 	margin-left: 5%;
 	font-weight:bold;
+	font-size: 30px;
 }
 .profile-icon {
 	width: 50px;
@@ -121,6 +121,7 @@ body {
 	margin: auto;
 	margin-top: 50px;
 	padding: 50px;
+	border-radius: 50px;
 }
 
 input[type=title-text] {
@@ -152,9 +153,6 @@ input[type=file] {
 	padding: 5px;
 }
 
-/*input[type=text1]:focus {
-	width: 500px;
-}*/
 
 /* login page */
 input[type=text2] {
@@ -162,6 +160,15 @@ input[type=text2] {
 	border: none;
 	border-bottom: 2px solid grey;
 	width: 200px;
+	border-radius: 5px;
+}
+
+input[type=search] {
+	background-color: #F6CBA7;
+	border: none;
+	width: 200px;
+	border-radius: 8px;
+	padding: 5px;
 }
 
 input[type=password] {
@@ -179,11 +186,10 @@ input[type=password] {
 
 .login-container {
 	width: 500px;
-	height: 200px;
 	background-color: #F6CBA7;
 	margin: auto;
 	margin-top: 50px;
-	padding: 10px;
+	padding: 50px;
 	border-radius: 50px;
 }
 
