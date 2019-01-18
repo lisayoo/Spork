@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> spork </title>
+	<title> profile: spork </title>
 
+	<!-- css styling -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="../../public/css/profile.css">
+	<link rel="stylesheet" href="../../public/css/style.css">
 </head>
 
 <body>
+	<!-- navbar -->
 	<nav class="navbar navbar-custom">
 		<div class="navbar-brand">spork</div>
 		<div class="navbar-nav" id="nav-item-container"> 
@@ -18,23 +19,21 @@
 		</div>
 	</nav>
 
-	<div id="profile-container">
-		<div class="basic-info">
-			<div class="profile-image"></div>
-			<div class="profile-text">username</div>
+	<!-- profile -->
+	<div class="flex-container">
+		<div class="profile-image"></div>
+		<div class="profile-text">username</div>
 
-			<div class="divider"></div>
+		<div class="divider"></div>
 
-			<a class="big-button" href="/followers"> followers </a> 
-			<a class="big-button" href="/following"> following </a> 
+		<a class="big-button follow-button" href="/followers"> followers </a> 
+		<a class="big-button follow-button" href="/following"> following </a> 
+	</div> 
 
-		</div> 
-
-		<div class="info-cols">
-			<div class="card">my stats</div>
-			<div class="card">my recipes</div>
-			<div class="card">my favorites</div>
-		</div>
+	<div class="flex-container">
+		<div class="card">my stats</div>
+		<div class="card">my recipes</div>
+		<div class="card">my favorites</div>
 	</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
