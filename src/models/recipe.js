@@ -13,7 +13,7 @@ const forkSchema = new mongoose.Schema ({
 
 const recipeSchema = new mongoose.Schema ({
 	name: String,
-	author: String,
+	//author: String,
 	upload_date: {type: Date, default: Date.now},
 	description: String,
 	ingredients: String,

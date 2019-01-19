@@ -9,7 +9,7 @@ const cors = require('cors');
 const db = require('./db.js');
 const passport = require('./passport');
 const views = require('./routes/views.js');
-const api = require('./routes/api.js')
+// const api = require('./routes/api.js')
 
 // initialize express app
 const app = express();
@@ -38,7 +38,7 @@ app.get(
 
 // set routes
 app.use('/', views);
-app.use('/api', api);
+// app.use('/api', api);
 app.use('/static', express.static('public'));
 
 // 404 route
