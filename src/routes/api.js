@@ -30,10 +30,10 @@ router.post(
   function(req, res) {
     User.findOne({ _id: req.user._id },function(err,user) {
       const toPost = new recipe({
-        'name': req.body.recipetitle,
-        'description': req.body.recipedescription,
-        'ingredients': req.body.ingredients,
-        'steps': req.body.steps,
+        'name': req.body.rt,
+        'description': req.body.rd,
+        'ingredients': req.body.ri,
+        'steps': req.body.rs,
         'forks': []
       });
 

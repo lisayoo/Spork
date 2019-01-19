@@ -2,7 +2,6 @@
 function submitNewRecipe() {
   // TO BE IMPLEMENTED:
   // submit the story to our newly implemented database
-  console.log("submitting");
   const rtitle = document.getElementById('recipetitle');
   const rdesc = document.getElementById('recipedescriptions');
   const ringr = document.getElementById('recipeingredients');
@@ -15,6 +14,6 @@ function submitNewRecipe() {
     "rs": rsteps  };
 
   post('/api/newrecipe', data);
+  // what is this next line doing?
 }
 
-document.addEventListener("recipe-submit", submitNewRecipe());
