@@ -1,0 +1,35 @@
+{
+  "name": "lisayoo-kat-wicks",
+  "version": "1.0.0",
+  "description": "recipe forker for web.lab 2019",
+  "main": "passport.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mit6148/lisayoo-kat-wicks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mit6148/lisayoo-kat-wicks/issues"
+  },
+  "homepage": "https://github.com/mit6148/lisayoo-kat-wicks#readme",
+  "scripts": {
+    "start": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "connect-ensure-login": "^0.1.1",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.1",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.0",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth20": "^1.0.0",
+    "session": "^0.1.0",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}

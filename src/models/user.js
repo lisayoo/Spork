@@ -4,8 +4,7 @@ const userSchema = new mongoose.Schema({
 	username: String,
 	googleid: String,
 	name: String,
-	bio: String,
-	recipes: {type: Array, of: ObjectId}
+	bio: String
 })
 
 const user = mongoose.model("user", userSchema);
