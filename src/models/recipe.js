@@ -6,7 +6,7 @@ const forkSchema = new mongoose.Schema ({
 	author: String,
 	upload_date: {type: Date, default: Date.now},
 	edits: {type: Array, of: Map},
-	forks: [forkSchema]
+	forks: []
 
 });
 

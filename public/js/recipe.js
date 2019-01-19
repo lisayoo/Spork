@@ -71,4 +71,4 @@ function submitNewRecipe() {
   post('/newrecipe', data);
 }
 
-document.addEventListener("recipe-submit", submitNewRecipe());
+document.addEventListener("submit", submitNewRecipe());
