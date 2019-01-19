@@ -28,8 +28,8 @@ router.post(
   '/newrecipe',
   // connect.ensureLoggedIn(),
   function(req, res) {
-    User.findOne({ _id: req.user._id },function(err,user) {
-      const toPost = new recipe({
+      console.log("hi");
+      const toPost = new Recipe({
         'name': req.body.rt,
         'description': req.body.rd,
         'ingredients': req.body.ri,
@@ -46,6 +46,9 @@ router.post(
       });
 
       res.send({});
-    });
   }
 );
+
+module.exports = router;
+
+

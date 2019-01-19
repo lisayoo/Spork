@@ -6,18 +6,25 @@ const forkSchema = new mongoose.Schema ({
 	author: String,
 	upload_date: {type: Date, default: Date.now},
 	edits: {type: Array, of: Map},
-	forks: [forkSchema]
+	// forks: [forkSchema]
 
 });
 
 
 const recipeSchema = new mongoose.Schema ({
-	name: String,
+	// name: String,
 	//author: String,
+	// upload_date: {type: Date, default: Date.now},
+	// description: String,
+	// ingredients: String,
+	// steps: String,
+	// forks: [forkSchema]
+
+	name: {type: String, default: ''},
 	upload_date: {type: Date, default: Date.now},
-	description: String,
-	ingredients: String,
-	steps:String,
+	description: {type: String, default: ''},
+	ingredients: {type: String, default: ''},
+	steps: {type: String, default: ''},
 	forks: [forkSchema]
 
 
