@@ -2,7 +2,7 @@
 const http = require('http');
 const bodyParser = require('body-parser');
 const express = require('express');
-
+const mongoose = require("mongoose");
 
 // local dependencies
 const db = require('./db.js');
