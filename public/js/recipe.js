@@ -59,8 +59,8 @@ function submitNewRecipe() {
   console.log("submitting");
   const rtitle = document.getElementById('recipetitle');
   const rdesc = document.getElementById('recipedescriptions');
-  const ringr = document.getElementById('recipeingredients');
-  const rsteps = document.getElementById('recipesteps');
+  const ringr = document.getElementById('ingredients');
+  const rsteps = document.getElementById('steps');
 
   const data = {
     "rt": rtitle,
@@ -71,4 +71,4 @@ function submitNewRecipe() {
   post('/newrecipe', data);
 }
 
-document.addEventListener("recipe-submit", submitNewRecipe());
+document.addEventListener("submit", submitNewRecipe());

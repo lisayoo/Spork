@@ -19,8 +19,11 @@ router.get('/recipe', function(req, res) {
 router.get('/u/profile', function(req, res) {
   req.sendFile('profile.html',{ root: 'src/views' });
 });
+<<<<<<< HEAD
 // router.get('/newrecipe', function(req, res, next) {
 //   res.sendFile('index.html', { root: 'src/views' });
 // });
+=======
+>>>>>>> 38368ab937f99d3da82253cffe6805dd319e3595
 module.exports = router;
 
