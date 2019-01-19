@@ -59,8 +59,8 @@ function submitNewRecipe() {
   console.log("submitting");
   const rtitle = document.getElementById('recipetitle');
   const rdesc = document.getElementById('recipedescriptions');
-  const ringr = document.getElementById('recipeingredients');
-  const rsteps = document.getElementById('recipesteps');
+  const ringr = document.getElementById('ingredients');
+  const rsteps = document.getElementById('steps');
 
   const data = {
     "rt": rtitle,
@@ -68,7 +68,7 @@ function submitNewRecipe() {
     "ri": ringr,
     "rs": rsteps  };
 
-  post('/api/newrecipe', data);
+  post('/newrecipe', data);
 }
 
 document.addEventListener("recipe-submit", submitNewRecipe());
