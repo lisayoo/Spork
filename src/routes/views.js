@@ -12,6 +12,10 @@ router.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+router.get('/recipe', function(req, res) {
+   res.sendFile('recipe.html', { root: 'src/views' });
+});
+
 router.get('/u/profile', function(req, res) {
   req.sendFile('profile.html',{ root: 'src/views' });
 });
