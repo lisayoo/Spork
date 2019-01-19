@@ -1,0 +1,1 @@
+document.getElementById("recipe-submit").onclick = submitRecipe();

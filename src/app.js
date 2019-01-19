@@ -2,12 +2,10 @@
 const http = require('http');
 const bodyParser = require('body-parser');
 const express = require('express');
-const session = require('express-session');
-const cors = require('cors');
+const mongoose = require("mongoose");
 
 // local dependencies
 const db = require('./db.js');
-const passport = require('./passport');
 const views = require('./routes/views.js');
 const api = require('./routes/api.js')
 
@@ -17,24 +15,6 @@ const app = express();
 // set POST request body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// hook up passport
-app.use(passport.initialize());
-app.use(passport.session());
-
-// authentication routes
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
-
-app.get(
-  '/auth/google/callback',
-  passport.authenticate(
-    'google',
-    { failureRedirect: '/login' }
-  ),
-  function(req, res) {
-    res.redirect('/');
-  }
-);
 
 // set routes
 app.use('/', views);
