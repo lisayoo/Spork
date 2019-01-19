@@ -26,7 +26,7 @@ router.get('/feed', function(req, res) {
 
 router.post(
   '/newrecipe',
-  connect.ensureLoggedIn(),
+  // connect.ensureLoggedIn(),
   function(req, res) {
     User.findOne({ _id: req.user._id },function(err,user) {
       const toPost = new recipe({
@@ -37,8 +37,8 @@ router.post(
         'forks': []
       });
 
-      user.recipes.addTOSet(recipe._id);
-      user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
+      // user.recipes.addTOSet(recipe._id);
+      // user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
 
       toPost.save(function(err,recipe) {
         // configure socketio

@@ -19,8 +19,8 @@ router.get('/recipe', function(req, res) {
 router.get('/u/profile', function(req, res) {
   req.sendFile('profile.html',{ root: 'src/views' });
 });
-router.get('/newrecipe', function(req, res, next) {
-  res.sendFile('index.html', { root: 'src/views' });
-});
+// router.get('/newrecipe', function(req, res, next) {
+//   res.sendFile('index.html', { root: 'src/views' });
+// });
 module.exports = router;
 

@@ -68,7 +68,7 @@ function submitNewRecipe() {
     "ri": ringr,
     "rs": rsteps  };
 
-  post('/api/newrecipe', data);
+  post('/newrecipe', data);
 }
 
 document.addEventListener("recipe-submit", submitNewRecipe());
