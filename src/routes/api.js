@@ -46,7 +46,9 @@ router.get('/recipes', function(req, res) {
 });
 
 router.get('/feed', function(req, res) {
+
   Recipe.find({}, function(err, feed) {
+    console.log(feed)
     res.send(feed);
   });
 });
@@ -93,8 +95,6 @@ router.post('/editrecipe', function(req, res) {
       });
 
       editId = toPost._id
-      console.log(editId)
-      console.log('HELLO')
   // Recipe.findById(req.query.p, function(err, recipe) {
   Recipe.findById(req.body.p, function(err, recipe) {
     if (err) {

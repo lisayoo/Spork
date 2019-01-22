@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> view recipe: spork </title>
+
+	<!-- css styling -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>	
+	<!-- navbar -->
+	<nav class="navbar navbar-custom">
+		<div class="navbar-brand">spork</div>
+		<div class="navbar-nav" id="nav-item-container"> 
+			<div class="container">
+				<input type="search" placeholder="search">
+				<a class="big-button" href="."> profile </a>  				
+			</div>
+		</div>
+	</nav>
+
+	<!-- recipe card -->
+	<div class="view-container center">
+		<div id = "title" class = "title-text">title</div>
+		<div id = "description" class = "card-text section">description</div>
+		<div id = "ingredients" class = "card-text section">ingredients</div>
+		<div style = "margin-bottom: 4%" id = "steps" class = "card-text section">steps</div>
+		<a id = "editbutton" style = "font-weight: bold" class="bigger-button" href="#"> add a fork! </a>
+	</div>
+
+<script src="static/js/api.js"></script>
+<script src="static/js/viewrecipe.js"></script>
+<!-- <script src="../routes/api.js"></script> -->
+</body>
+</html>
