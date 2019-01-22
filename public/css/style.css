@@ -137,7 +137,38 @@ body {
 	width: 500px;
 }
 
+/*recipe card classes*/
+.title-text{
+	font-size: 80px;
+	color:#F9EDD4;
+	font-weight:bold;
+}
+.card-text{
+	font-size: 15px;
+	color: #485863;
+}
 
+.section{
+	width: 100%;
+	background-color: #F6CBA7;
+	margin-right: 2%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	margin-left: 0%;
+	padding: 10px;
+	border-radius: 4px;
+	text-align:left;
+}
+
+.view-container {
+	width: 800px;
+	height: auto;
+	background-color: #F7AF7C;
+	margin: auto;
+	margin-top: 50px;
+	padding: 50px;
+	border-radius: 50px;
+}
 
 /* add recipe page */
 .recipe-container {
