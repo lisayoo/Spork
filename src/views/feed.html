@@ -21,22 +21,23 @@
 		</div>
 	</nav>
 
-	<!-- profile -->
-	<div class="flex-container">
-		<div class="profile-image"></div>
-		<div class="profile-text">username</div>
-
-		<div class="divider"></div>
-
-		<a class="big-button follow-button" href="/followers"> followers </a> 
-		<a class="big-button follow-button" href="/following"> following </a> 
-	</div> 
-
-	<div class="flex-container">
-		<div class="card">my stats</div>
-		<div class="card">my recipes</div>
-		<div class="card">my favorites</div>
+	<div class="container feed-container">
+      <div class="row">
+        <div class="col">
+          <div id="new-story">
+            <!-- new story input inserted here -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div id="stories" class="col">
+          <!-- stories are inserted here -->
+        </div>
+      </div>
+    </div>
+    <div id="app"></div>
 	</div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

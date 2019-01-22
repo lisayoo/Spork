@@ -24,9 +24,12 @@ router.get('/view', function(req, res) {
    res.sendFile('view.html', { root: 'src/views' });
 });
 
-
 router.get('/u/profile', function(req, res) {
   req.sendFile('profile.html',{ root: 'src/views' });
+});
+
+router.get('/feed', function(req, res) {
+  res.sendFile('feed.html',{ root: 'src/views' });
 });
 
 // router.get('/newrecipe', function(req, res, next) {
