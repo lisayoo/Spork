@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// const mongoURL = process.env.ATLAS_SRV;
 const mongoURL = "mongodb+srv://kwicks:admin@cluster0-99k99.mongodb.net/test?retryWrites=true";
 const options = { };
 
