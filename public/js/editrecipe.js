@@ -33,7 +33,6 @@ function submitRecipeEdit() {
   post('/api/editrecipe', data);
 }
 const recipeId = window.location.search.substring(1);
-console.log(recipeId);
 popRecipe(recipeId);
 let submit = document.getElementById("recipesubmit")
 submit.addEventListener("click", submitRecipeEdit);

@@ -1,17 +1,17 @@
 
 const mongoose= require('mongoose');
 
-const forkSchema = new mongoose.Schema ({
-	name: {type: String, default: ''},
-	// author: String,
-	upload_date: {type: Date, default: Date.now},
-	description: {type: String, default: ''},
-	ingredients: {type: String, default: ''},
-	steps: {type: String, default: ''},
-	forks: []
-	// forks: [forkSchema]
+// const forkSchema = new mongoose.Schema ({
+// 	name: {type: String, default: ''},
+// 	// author: String,
+// 	upload_date: {type: Date, default: Date.now},
+// 	description: {type: String, default: ''},
+// 	ingredients: {type: String, default: ''},
+// 	steps: {type: String, default: ''},
+// 	forks: []
+// 	// forks: [forkSchema]
 
-});
+// });
 
 
 const recipeSchema = new mongoose.Schema ({
@@ -28,7 +28,7 @@ const recipeSchema = new mongoose.Schema ({
 	description: {type: String, default: ''},
 	ingredients: {type: String, default: ''},
 	steps: {type: String, default: ''},
-	forks: [forkSchema]
+	forks: [{type: mongoose.Schema.Types.ObjectId, ref:"recipe"}]
 
 
 });

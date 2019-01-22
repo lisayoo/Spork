@@ -56,14 +56,12 @@ router.post(
   '/newrecipe',
   // connect.ensureLoggedIn(),
   function(req, res) {
-      console.log("hi");
       console.log(req.body);
       const toPost = new Recipe({
         'name': req.body.rt,
         'description': req.body.rd,
         'ingredients': req.body.ri,
         'steps': req.body.rs,
-        'forks': []
       });
 
       // user.recipes.addTOSet(recipe._id);
@@ -80,11 +78,25 @@ router.post(
 
 
 router.post('/editrecipe', function(req, res) {
-  console.log('edited');
-  console.log(req.query);
+  const toPost = new Recipe({
+        'name': req.body.rt,
+        'description': req.body.rd,
+        'ingredients': req.body.ri,
+        'steps': req.body.rs,
+      });
+
+      // user.recipes.addTOSet(recipe._id);
+      // user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
+      toPost.save(function(err,recipe) {
+        // configure socketio
+        if (err) console.log(err);
+      });
+
+      editId = toPost._id
+      console.log(editId)
+      console.log('HELLO')
   // Recipe.findById(req.query.p, function(err, recipe) {
-  Recipe.findById('5c4646bf2f469d35cca3336c', function(err, recipe) {
-    console.log(recipe);
+  Recipe.findById(req.body.p, function(err, recipe) {
     if (err) {
           // handle the error
           console.log("An error occured: ", err.message);
@@ -94,16 +106,11 @@ router.post('/editrecipe', function(req, res) {
           console.log("No recipe with the given id found.");
     } else {
           // this means we found the student under name "Aaron"
-          console.log(recipe);
-          recipe.forks.push({
-            'name': req.body.rt,
-            'description': req.body.rd,
-            'ingredients': req.body.ri,
-            'steps': req.body.rs,
-            'forks': []
-          });
+          
+          recipe.forks.push(editId);
           console.log(recipe.forks);
           recipe.save()
+
           res.send(recipe);
     }
   });
