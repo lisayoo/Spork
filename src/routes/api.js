@@ -1,6 +1,8 @@
+// dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
 
+// models
 const User = require("../models/user.js")
 const Recipe = require("../models/recipe.js")
 
@@ -9,6 +11,16 @@ const router = express.Router()
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+
+// api endpoints
+router.get('/whoami', function(req, res) {
+  if(req.isAuthenticated()){
+    res.send(req.user);
+  }
+  else{
+    res.send({});
+  }
+});
 
 router.get('/user', function(req, res) {
   User.findOne({ _id: req.query._id }, function(err, user) {
