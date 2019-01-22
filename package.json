@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/mit6148/lisayoo-kat-wicks#readme",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "nodemon src/app.js"
   },
   "dependencies": {
     "connect-ensure-login": "^0.1.1",
@@ -30,6 +30,6 @@
     "socket.io": "^2.0.4"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.12.1"
   }
 }
