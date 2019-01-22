@@ -5,7 +5,7 @@
 
 	<!-- css styling -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-	<link rel="stylesheet" href="../../public/css/style.css">
+	<link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>	
@@ -22,14 +22,19 @@
 
 	<!-- recipe card -->
 	<div class="recipe-container flex-container center">
-		<form class="center" action="/editrecipe">
-			<br><input id = "recipetitle" type="title-text" name="title" placeholder="add a title"><br>
+		<form class="center">
+			<br><input id = "recipetitle" type="text" name="title" placeholder="add a title"><br>
+
 			<br><textarea id="recipedescription" placeholder="add a description!"></textarea><br>
-			<input type="file" name="fileupload" value="fileupload" id="fileupload">
+			<!-- <input type="file" name="fileupload" value="fileupload" id="fileupload"> -->
 			<textarea placeholder="ingredients (name:quantity) separated by comma" name="ingredients" id="ingredients"></textarea> 
 			<textarea placeholder="steps, separated by comma" name="steps" id = "steps"></textarea>
-			<br><a id ="recipe-submit" class="big-button login-button" href="/recipe-page"> submit! </a><br>
+			<br><a id= "recipesubmit" href="#">submit</a></br>
+			<!-- <br><input type="submit" name="submit" value="submit" id="submit"> submit!<br> -->
 		</form>
 	</div>
+<script src="static/js/api.js"></script>
+<script src="static/js/editrecipe.js"></script>
+<!-- <script src="../routes/api.js"></script> -->
 </body>
 </html>

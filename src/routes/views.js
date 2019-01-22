@@ -16,8 +16,18 @@ router.get('/recipe', function(req, res) {
    res.sendFile('recipe.html', { root: 'src/views' });
 });
 
+router.get('/edit', function(req, res) {
+   res.sendFile('edit.html', { root: 'src/views' });
+});
+
+
 router.get('/u/profile', function(req, res) {
   req.sendFile('profile.html',{ root: 'src/views' });
 });
+
+// router.get('/newrecipe', function(req, res, next) {
+//   res.sendFile('index.html', { root: 'src/views' });
+// });
+
 module.exports = router;
 
