@@ -1,7 +1,1 @@
-.env
 .DS_Store
-/*.log
-node_modules/
-*.swp
-package-lock.json
-yarn.lock
