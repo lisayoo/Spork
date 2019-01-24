@@ -115,6 +115,15 @@ body {
 	margin: 25px;
 	font-size: 50px;
 }
+.bio-text{
+	margin-top: 25px;
+	font-size: 25px;
+}
+
+
+.new-photo {
+	display:none;
+}
 
 .card {
 	margin: 25px;

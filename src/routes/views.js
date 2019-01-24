@@ -17,6 +17,7 @@ router.get('/recipe', function(req, res) {
 });
 
 router.get('/edit', function(req, res) {
+	console.log(req.user);
    res.sendFile('edit.html', { root: 'src/views' });
 });
 
@@ -24,8 +25,8 @@ router.get('/view', function(req, res) {
    res.sendFile('view.html', { root: 'src/views' });
 });
 
-router.get('/u/profile', function(req, res) {
-  req.sendFile('profile.html',{ root: 'src/views' });
+router.get('/profile', function(req, res) {
+  res.sendFile('profile.html',{ root: 'src/views' });
 });
 
 router.get('/feed', function(req, res) {

@@ -14,3 +14,14 @@ dbConnection.on('error', console.error.bind(console, 'connection error:'));
 dbConnection.on('connected', function() {
       console.log('database connected');
 });
+
+const cloudinary = require("cloudinary");
+const multer = require("multer");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+
+
+cloudinary.config({
+	cloud_name: 'spork',
+	api_key: '931476311764324',
+	api_secret: 'UzuJ9BZe7ERB83QuBV7la1DhSJc'
+})
