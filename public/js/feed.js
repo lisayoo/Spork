@@ -1,3 +1,5 @@
+// const api = require('./routes/api.js');
+
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);
@@ -7,39 +9,38 @@ function storyDOMObject(storyJSON) {
   cardBody.className = 'card-body';
   card.appendChild(cardBody);
 
+  const contentSpan = document.createElement('p');
+  contentSpan.className = 'story-content card-text';
+  contentSpan.innerHTML = storyJSON.content;
+  cardBody.appendChild(contentSpan);
+
   // const creatorSpan = document.createElement('a');
   // creatorSpan.className = 'story-creator card-title';
   // creatorSpan.innerHTML = storyJSON.creator_name;
   // creatorSpan.setAttribute('href', '/u/profile?' + storyJSON.creator_id);
   // cardBody.appendChild(creatorSpan);
 
-  // const contentSpan = document.createElement('p');
-  // contentSpan.className = 'story-content card-text';
-  // contentSpan.innerHTML = storyJSON.content;
-  // cardBody.appendChild(contentSpan);
-
   // const cardFooter = document.createElement('div');
   // cardFooter.className = 'card-footer';
   // card.appendChild(cardFooter);
-
-  // const commentsDiv = document.createElement('div');
-  // commentsDiv.setAttribute('id', storyJSON._id + '-comments');
-  // commentsDiv.className = 'story-comments';
-  // cardFooter.appendChild(commentsDiv);
 
   return card;
 }
 
 
-function renderStories(user) {
-  // if (user._id !== undefined)
-  //   document.getElementById('new-story').appendChild(newStoryDOMObject());
-
+function renderStories() {
+  console.log('calling renderStories');
   const storiesDiv = document.getElementById('stories');
+  console.log('made storiesDiv');
   get('/api/feed', {}, function(storiesArr) {
+    console.log('successful get request');
     for (let i = 0; i < storiesArr.length; i++) {
       const currentStory = storiesArr[i];
-      storiesDiv.prepend(storyDOMObject(currentStory, user));
+      storiesDiv.prepend(storyDOMObject(currentStory));
     }
   });
 }
+
+renderStories();
+
+

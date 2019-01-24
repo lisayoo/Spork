@@ -42,9 +42,9 @@ router.get('/recipes', function(req, res) {
 });
 
 router.get('/feed', function(req, res) {
-
+  console.log("first hello")
   Recipe.find({}, function(err, feed) {
-    console.log(feed)
+    console.log("second hello")
     res.send(feed);
   });
 });

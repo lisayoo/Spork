@@ -25,7 +25,7 @@ router.get('/view', function(req, res) {
    res.sendFile('view.html', { root: 'src/views' });
 });
 
-router.get('/profile', function(req, res) {
+router.get('/u/profile', function(req, res) {
   res.sendFile('profile.html',{ root: 'src/views' });
 });
 
