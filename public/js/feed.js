@@ -31,10 +31,10 @@ function storyDOMObject(storyJSON) {
 }
 
 
-function renderStories(user) {
+function renderStories() {
   // if (user._id !== undefined)
   //   document.getElementById('new-story').appendChild(newStoryDOMObject());
-
+  console.log('im here');
   const storiesDiv = document.getElementById('stories');
   get('/api/feed', {}, function(storiesArr) {
     for (let i = 0; i < storiesArr.length; i++) {
@@ -43,3 +43,13 @@ function renderStories(user) {
     }
   });
 }
+
+renderStories();
+// function main() {
+//   get('/api/whoami', {}, function(user) {
+//     renderStories(user);
+//   });
+// }
+
+// main();
+

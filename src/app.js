@@ -41,7 +41,8 @@ app.get(
     { failureRedirect: '/login' }
   ),
   function(req, res) {
-    res.redirect('/');
+    // res.redirect('/');
+    res.sendFile('feed.html', { root: 'src/views' })
   }
 );
 
