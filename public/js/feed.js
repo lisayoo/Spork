@@ -3,22 +3,23 @@
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);
-  card.className = 'story card';
+  card.className = 'story';
 
   const cardBody = document.createElement('div');
   cardBody.className = 'card-body';
   card.appendChild(cardBody);
 
-  const contentSpan = document.createElement('p');
-  contentSpan.className = 'story-content card-text';
-  contentSpan.innerHTML = storyJSON.content;
+  const contentSpan = document.createElement('a');
+  contentSpan.className = 'story-content card-title';
+  contentSpan.innerHTML = storyJSON.name;
+  contentSpan.setAttribute('href', '/view?' + storyJSON._id);
   cardBody.appendChild(contentSpan);
 
-  // const creatorSpan = document.createElement('a');
-  // creatorSpan.className = 'story-creator card-title';
-  // creatorSpan.innerHTML = storyJSON.creator_name;
-  // creatorSpan.setAttribute('href', '/u/profile?' + storyJSON.creator_id);
-  // cardBody.appendChild(creatorSpan);
+  const creatorSpan = document.createElement('a');
+  creatorSpan.className = 'story-creator card-title';
+  creatorSpan.innerHTML = storyJSON.author;
+  creatorSpan.setAttribute('href', '/u/profile?' + storyJSON.author);
+  cardBody.appendChild(creatorSpan);
 
   // const cardFooter = document.createElement('div');
   // cardFooter.className = 'card-footer';

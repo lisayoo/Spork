@@ -1,6 +1,6 @@
 
 
-function submitNewRecipe() {
+function submitNewRecipe(user) {
   // TO BE IMPLEMENTED:
   // submit the story to our newly implemented database
   console.log("submitting");

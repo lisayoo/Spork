@@ -1,6 +1,7 @@
 // dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
+const connect = require('connect-ensure-login');
 
 // models
 const User = require("../models/user.js")
@@ -53,21 +54,21 @@ router.get('/feed', function(req, res) {
   });
 });
 
-
 router.post(
   '/newrecipe',
-  // connect.ensureLoggedIn(),
+  connect.ensureLoggedIn(),
   function(req, res) {
-      console.log(req.body);
+    User.findOne({ _id: req.user._id },function(err,user) {
       const toPost = new Recipe({
         'name': req.body.rt,
+        'author': user.name,
         'description': req.body.rd,
         'ingredients': req.body.ri,
         'steps': req.body.rs,
       });
 
-      // user.recipes.addTOSet(recipe._id);
-      // user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
+      // user.set({ last_post: req.body.content });
+      user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
 
       toPost.save(function(err,recipe) {
         // configure socketio
@@ -75,6 +76,7 @@ router.post(
       });
 
       res.send({});
+    });
   }
 );
 
