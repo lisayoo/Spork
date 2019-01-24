@@ -1,3 +1,5 @@
+// const api = require('./routes/api.js');
+
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);
@@ -30,7 +32,7 @@ function renderStories() {
   console.log('calling renderStories');
   const storiesDiv = document.getElementById('stories');
   console.log('made storiesDiv');
-  get('/api/stories', {}, function(storiesArr) {
+  get('/api/feed', {}, function(storiesArr) {
     console.log('successful get request');
     for (let i = 0; i < storiesArr.length; i++) {
       const currentStory = storiesArr[i];
