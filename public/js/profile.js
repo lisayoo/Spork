@@ -26,6 +26,6 @@ function popProfile(u) {
     descDiv.innerHTML = userLoad.bio;
   });
 }
-
+if 
 const profileId = window.location.search.substring(1);
 popProfile(profileId);

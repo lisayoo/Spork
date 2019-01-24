@@ -1,6 +1,7 @@
 // dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
+const connect = require('connect-ensure-login');
 
 // models
 const User = require("../models/user.js")
