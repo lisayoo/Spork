@@ -255,3 +255,18 @@ input[type=password] {
 }
 
 
+/* feed page */
+.story {
+	margin: 10px 0px;
+}
+.story-creator {
+  	font-size: 20px;
+  	font-weight: 600;
+}
+.story-content {
+	font-size: 40px;
+}
+.feed-container {
+	padding: 1rem 0;
+}
+
