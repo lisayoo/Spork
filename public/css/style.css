@@ -77,6 +77,16 @@ body {
 	background-color: grey;
 }
 
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
 
 
 /* landing page classes */
@@ -287,4 +297,6 @@ input[type=password] {
 .feed-container {
 	padding: 1rem 0;
 }
+
+
 

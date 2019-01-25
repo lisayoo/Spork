@@ -54,9 +54,39 @@ router.get('/feed', function(req, res) {
   });
 });
 
-// router.get('/search', function(req, res) {
-//   Recipe.find($or[{name: req.}])
-// })
+router.get('/search', function(req, res) {
+  User.find( {name: req.query.key}, function(err, results) {
+    if (err) {
+      console.log("An error occured: ", err.message);
+    } else {
+      console.log("results found");
+      res.send(results);
+    }
+  });
+
+  Recipe.find( {nae: req.query.key} , function (err, results) {
+    if (err) {
+      console.log("An error occured: ", err.message);
+    } else {
+      console.log("results found");
+      res.send(results);
+    }
+  });
+});
+
+// Student.find({name: "Aaron"}, function(err, students_named_Aaron) {
+//       if (err) {
+//             // handle the error
+//             console.log("An error occured: ", err.message);
+//       } else if (students_named_Aaron.length === 0) {
+//             // handler the case when no student in the database
+//             // matches the given parameters
+//             console.log(`No students under name "Aaron" found.`);
+//       } else {
+//             // this means we found "many" students under name "Aaron"
+//             console.log("The number of students named Aaron is ", students_named_Aaron.length);
+//       }
+// });
 
 router.post(
   '/newrecipe',
@@ -64,10 +94,10 @@ router.post(
   function(req, res) {
     User.findOne({ _id: req.user._id },function(err,user) {
       const toPost = new Recipe({
-        'name': req.body.rt,
+        'name': req.query.rt,
         'author': user._id,
         'authorname': user.name,
-        'description': req.body.rd,
+        'description': req.query.rd,
         'ingredients': req.body.ri,
         'steps': req.body.rs,
       });
