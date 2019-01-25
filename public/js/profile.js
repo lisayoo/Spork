@@ -43,12 +43,20 @@ function popProfile(u) {
   const descDiv = document.getElementById('bio');
   const recipeCard =document.getElementById('recipes');
   if (u !== ""){
-    get('/api/user', {_id: u}, function(userLoad) {
+    get('/api/user', {_id: u}, function(user) {
     console.log("getting specific user from url");
-  	console.log(userLoad);
-    titleDiv.innerHTML = userLoad.name;
-    descDiv.innerHTML = userLoad.bio;
-  });
+  	console.log(user);
+    titleDiv.innerHTML = user.name;
+    descDiv.innerHTML = user.bio;
+    if (user.recipes !== []){
+      console.log(user.recipes);
+      for (let i = 0; i < user.recipes.length; i++) {
+        const currentStory = get('/api/recipes', {_id: user.recipes[i]}, function(currentStory) {
+          recipeCard.prepend(storyDOMObject(currentStory));
+            });
+        }
+      }
+});
   	
 	} else {
 
@@ -58,6 +66,7 @@ function popProfile(u) {
 		    	titleDiv.innerHTML = user.name;
 		    	descDiv.innerHTML = user.bio;
 		    	if (user.recipes !== []){
+            recipeCard.innerHTML = "";
 		    		console.log(user.recipes);
 		    		for (let i = 0; i < user.recipes.length; i++) {
      					const currentStory = get('/api/recipes', {_id: user.recipes[i]}, function(currentStory) {

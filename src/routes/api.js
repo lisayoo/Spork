@@ -62,7 +62,8 @@ router.post(
     User.findOne({ _id: req.user._id },function(err,user) {
       const toPost = new Recipe({
         'name': req.body.rt,
-        'author': user.name,
+        'author': user._id,
+        'authorname': user.name,
         'description': req.body.rd,
         'ingredients': req.body.ri,
         'steps': req.body.rs,
@@ -86,7 +87,8 @@ router.post('/editrecipe', function(req, res) {
   User.findOne({ _id: req.user._id },function(err,user) {
   const toPost = new Recipe({
         'name': req.body.rt,
-        'author': user.name,
+        'author': user._id,
+        'authorname' :user.name,
         'description': req.body.rd,
         'ingredients': req.body.ri,
         'steps': req.body.rs,

@@ -17,7 +17,7 @@ function storyDOMObject(storyJSON) {
 
   const creatorSpan = document.createElement('a');
   creatorSpan.className = 'story-creator card-title';
-  creatorSpan.innerHTML = storyJSON.author;
+  creatorSpan.innerHTML = storyJSON.authorname;
   creatorSpan.setAttribute('href', '/u/profile?' + storyJSON.author);
   cardBody.appendChild(creatorSpan);
 

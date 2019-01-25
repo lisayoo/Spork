@@ -24,7 +24,8 @@ const recipeSchema = new mongoose.Schema ({
 	// forks: [forkSchema]
 
 	name: {type: String, default: ''},
-	author: {type: String, default: ''},
+	author:{type:String, default:''},
+	authorname:{type:String, default:''},
 	upload_date: {type: Date, default: Date.now},
 	description: {type: String, default: ''},
 	ingredients: {type: String, default: ''},
