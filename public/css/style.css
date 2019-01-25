@@ -115,8 +115,12 @@ body {
 	margin: 25px;
 	font-size: 50px;
 }
+.profile-card-text {
+	margin: 5px;
+	font-size: 15px;
+}
 .bio-text{
-	margin-top: 25px;
+	margin-top: 15px;
 	font-size: 25px;
 }
 
@@ -267,13 +271,18 @@ input[type=password] {
 /* feed page */
 .story {
 	margin: 10px 0px;
+	background-color: #F6CBA7;
+	border-radius: 20px;
 }
 .story-creator {
   	font-size: 20px;
   	font-weight: 600;
+  	margin: 10px;
+  	color: grey;
 }
 .story-content {
 	font-size: 40px;
+	color: grey;
 }
 .feed-container {
 	padding: 1rem 0;

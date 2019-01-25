@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
 	googleid: String,
 	name: String,
 	bio: String,
-	recipes: {type: Array, of: mongoose.Schema.Types.ObjectId}
+	recipes: {type: Array, of: mongoose.Schema.Types.ObjectId, ref: 'recipe'}
 })
 
 const user = mongoose.model("user", userSchema);

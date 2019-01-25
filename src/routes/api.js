@@ -15,16 +15,21 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // api endpoints
 router.get('/whoami', function(req, res) {
+  console.log('whoami reached');
   if(req.isAuthenticated()){
+    console.log(req.user);
     res.send(req.user);
   }
   else{
+    console.log('no user logged in');
     res.send({});
   }
+  console.log("idk");
 });
 
 router.get('/user', function(req, res) {
-  User.findOne({ _id: req.query._id }, function(err, user) {
+  User.findById({ _id: req.query._id }, function(err, user) {
+    console.log(user);
     res.send(user);
   });
 });
@@ -50,32 +55,38 @@ router.get('/feed', function(req, res) {
   });
 });
 
-
 router.post(
   '/newrecipe',
-  // connect.ensureLoggedIn(),
+  connect.ensureLoggedIn(),
   function(req, res) {
-      console.log(req.body);
+    User.findOne({ _id: req.user._id },function(err,user) {
       const toPost = new Recipe({
         'name': req.body.rt,
+        'author': user.name,
         'description': req.body.rd,
         'ingredients': req.body.ri,
         'steps': req.body.rs,
       });
-
+      user.recipes.push(toPost._id);
+      // user.set({ last_post: req.body.content });
+      user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
       toPost.save(function(err,recipe) {
         // configure socketio
         if (err) console.log(err);
       });
 
       res.send({});
+    });
   }
 );
 
 
 router.post('/editrecipe', function(req, res) {
+  connect.ensureLoggedIn(),
+  User.findOne({ _id: req.user._id },function(err,user) {
   const toPost = new Recipe({
         'name': req.body.rt,
+        'author': user.name,
         'description': req.body.rd,
         'ingredients': req.body.ri,
         'steps': req.body.rs,
@@ -87,6 +98,7 @@ router.post('/editrecipe', function(req, res) {
       });
 
       editId = toPost._id
+  user.recipes.push(editId);
   Recipe.findById(req.body.p, function(err, recipe) {
     if (err) {
           console.log("An error occured: ", err.message);
@@ -100,6 +112,8 @@ router.post('/editrecipe', function(req, res) {
 
           res.send(recipe);
     }
+
+   });
   });
 });
 
