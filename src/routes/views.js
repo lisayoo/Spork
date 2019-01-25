@@ -33,6 +33,10 @@ router.get('/feed', function(req, res) {
   res.sendFile('feed.html',{ root: 'src/views' });
 });
 
+router.get('/search', function (req, res) {
+	res.sendFile('search.html', { root: 'src/view' });
+});
+
 // router.get('/newrecipe', function(req, res, next) {
 //   res.sendFile('index.html', { root: 'src/views' });
 // });
