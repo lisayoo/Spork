@@ -1,4 +1,12 @@
-	
+
+
+function submitProfileEdit(user) {
+  // TO BE IMPLEMENTED:
+  // submit the story to our newly implemented database
+
+}	
+
+
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);
@@ -21,16 +29,20 @@ function storyDOMObject(storyJSON) {
 }
 
 
-function submitNewProfile() {
+function submitNewProfile(user) {
   // TO BE IMPLEMENTED:
   // submit the story to our newly implemented database
-  console.log("submitting");
-  const photo = document.getElementById('new-photo').value;
-  data = {
-    pic: photo,
-    u : window.location.search.substring(1)
-  }
-  post('/api/newpropic', photo);
+    const parent = user;
+  const name = document.getElementById('editdisplayname').value;
+  const bio = document.getElementById('editbio').value;
+
+  const data = {
+    "p" : parent,
+    "n": name,
+    "b": bio,
+     };
+    console.log(data);
+  post('/api/editprofile', data);
 }
 
 // let submit = document.getElementById("profile-image")
@@ -43,20 +55,41 @@ function popProfile(u) {
   const descDiv = document.getElementById('bio');
   const recipeCard =document.getElementById('recipes');
   if (u !== ""){
+  	currentUser = "";
+  	get('/api/whoami', {}, function(user) {
+  		currentUser = user;
+  	});
     get('/api/user', {_id: u}, function(user) {
     console.log("getting specific user from url");
   	console.log(user);
+  	console.log(currentUser)
     titleDiv.innerHTML = user.name;
     descDiv.innerHTML = user.bio;
     if (user.recipes !== []){
+      recipeCard.innerHTML = "";
       console.log(user.recipes);
       for (let i = 0; i < user.recipes.length; i++) {
         const currentStory = get('/api/recipes', {_id: user.recipes[i]}, function(currentStory) {
           recipeCard.prepend(storyDOMObject(currentStory));
-            });
-        }
-      }
-});
+	            });
+	        }
+	      }
+	  if (currentUser !== user){
+	  	(document.getElementById('editprofilebutton')).remove();
+	  	(document.getElementById('modal')).remove();
+	  } else {
+	  	document.getElementById('profilesubmit').addEventListener('click', function(event){
+	  		submitNewProfile(user);
+	  		}
+	  		);
+	  	document.getElementById('editdisplayname').innerHTML = user.name;
+	  	document.getElementById('editbio').innerHTML = user.bio;
+	  }
+
+	  
+
+	});
+
   	
 	} else {
 
@@ -66,7 +99,7 @@ function popProfile(u) {
 		    	titleDiv.innerHTML = user.name;
 		    	descDiv.innerHTML = user.bio;
 		    	if (user.recipes !== []){
-            recipeCard.innerHTML = "";
+           			 recipeCard.innerHTML = "";
 		    		console.log(user.recipes);
 		    		for (let i = 0; i < user.recipes.length; i++) {
      					const currentStory = get('/api/recipes', {_id: user.recipes[i]}, function(currentStory) {
@@ -74,8 +107,13 @@ function popProfile(u) {
       						});
     					}
 		    		}
-		  
-		    }else {
+		    	document.getElementById('profilesubmit').addEventListener('click', function(event){
+		  			submitNewProfile(user);
+		  		});	  	
+		  		document.getElementById('editdisplayname').innerHTML = user.name;
+	  			document.getElementById('editbio').innerHTML = user.bio;
+		    
+		    } else {
 				window.location.replace('/auth/google');
 			}
 

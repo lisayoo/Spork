@@ -6,10 +6,13 @@ function popRecipe(recipe) {
   const ingDiv = document.getElementById('ingredients')
   const stepDiv = document.getElementById('steps')
   const edit = document.getElementById('editbutton')
+  const authorLink = document.getElementById('author')
   get('/api/recipes', {_id: recipe}, function(recipeLoad) {
     console.log(recipeLoad);
     console.log(recipeLoad.description)
     titleDiv.innerHTML = recipeLoad.name;
+    authorLink.innerHTML = recipeLoad.authorname;
+    authorLink.setAttribute('href', '/u/profile?' + recipeLoad.author);
     descDiv.innerHTML= recipeLoad.description;
     ingDiv.innerHTML = recipeLoad.ingredients;
     stepDiv.innerHTML = recipeLoad.steps;

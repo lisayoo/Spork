@@ -130,6 +130,17 @@ router.post('/editrecipe', function(req, res) {
   });
 });
 
+
+router.post('/editprofile', function(req, res) {
+  connect.ensureLoggedIn(),
+  User.findOne({ _id: req.user._id }, function(err,user) {
+      console.log(req.body)
+      user.set({name: req.body.n});
+      user.set({bio: req.body.b});
+      user.save();
+  });
+  
+});
 // router.post(
 //   '/editpropic',
 //   // connect.ensureLoggedIn(),
