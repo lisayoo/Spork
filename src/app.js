@@ -1,4 +1,5 @@
-// require(‘dotenv’).config();
+// dotenv
+const dotenv = require('dotenv').config();
 
 // libraries
 const http = require('http');
