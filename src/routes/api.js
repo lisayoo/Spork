@@ -47,10 +47,25 @@ router.get('/recipes', function(req, res) {
 });
 
 router.get('/feed', function(req, res) {
-  console.log("first hello")
+  // var currentLocation = window.location;
+  // console.log('currentLocation.href');
+  // console.log(currentLocation.href);
   Recipe.find({}, function(err, feed) {
-    console.log("second hello")
     res.send(feed);
+  });
+});
+
+router.get('/following', function(req, res) {
+  console.log('getting list of following');
+  User.find({_id: { $in: req.query.following }}, function(err, following) {
+    res.send(following);
+  });
+});
+
+router.get('/followers', function(req, res) {
+  console.log('getting list of followers');
+  User.find({_id: { $in: req.query.followers }}, function(err, followers) {
+    res.send(followers);
   });
 });
 
@@ -129,8 +144,6 @@ router.post('/editrecipe', function(req, res) {
         'steps': req.body.rs,
       });
 
-      // user.recipes.addTOSet(recipe._id);
-      // user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
       toPost.save(function(err,recipe) {
         // configure socketio
         if (err) console.log(err);
@@ -138,7 +151,7 @@ router.post('/editrecipe', function(req, res) {
 
       editId = toPost._id
     user.recipes.push(editId);
-  // Recipe.findById(req.query.p, function(err, recipe) {
+
   Recipe.findById(req.body.p, function(err, recipe) {
     if (err) {
           // handle the error
@@ -169,7 +182,6 @@ router.post('/editprofile', function(req, res) {
       user.set({bio: req.body.b});
       user.save();
   });
-  
 });
 // router.post(
 //   '/editpropic',
@@ -197,4 +209,43 @@ router.post('/editprofile', function(req, res) {
 //   }
 // );
 
+router.post(
+  '/subscribe',
+  connect.ensureLoggedIn(),
+  function(req, res) {
+    console.log('i am trying to subscribe!!!');
+    User.findOne({ _id: req.user._id },function(err,user) {
+      user.following.push(req.body.id);
+      console.log('my following' + user.following);
+       user.save();
+      User.findOne({_id: req.body.id}, function(err,them) {
+        them.followers.push(req.user._id);
+        console.log('their followers' + them.followers);
+        them.save();
+      });
+    });
+  res.send({});
+});
+
+router.post(
+  '/unsubscribe',
+  connect.ensureLoggedIn(),
+  function(req, res) {
+    console.log('UNSUBSCRIBE >:(');
+    User.findOne({ _id: req.user._id },function(err,user) {
+      user.following.remove(req.body.id);
+      console.log('my following' + user.following);
+       user.save();
+      User.findOne({_id: req.body.id}, function(err,them) {
+        them.followers.remove(req.user._id);
+        console.log('their followers' + them.followers);
+        them.save();
+      });
+    });
+  res.send({});
+});
+
 module.exports = router;
+
+
+

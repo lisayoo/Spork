@@ -32,7 +32,7 @@ function storyDOMObject(storyJSON) {
 function submitNewProfile(user) {
   // TO BE IMPLEMENTED:
   // submit the story to our newly implemented database
-    const parent = user;
+  const parent = user;
   const name = document.getElementById('editdisplayname').value;
   const bio = document.getElementById('editbio').value;
 
@@ -73,7 +73,7 @@ function popProfile(u) {
       console.log('hihihihihihihihi');
       profilePic.setAttribute('src', user.image_url);
       //test
-      profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
+      // profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
       profileDiv.appendChild(profilePic);
     }
       //default profile image
@@ -95,11 +95,24 @@ function popProfile(u) {
 	  if (currentUser !== user){
 	  	(document.getElementById('editprofilebutton')).remove();
 	  	(document.getElementById('modal')).remove();
+      if (user._id in currentUser.following) {
+        (document.getElementById('unsubscribe-button')).remove();
+      }
+      else {
+        (document.getElementById('subscribe-button')).remove();
+      }
+      
+      const profileContainer = document.getElementById('profile-container');
+      const subscribe = document.createElement('a');
+      user.following.pop
+
 	  } else {
+      (document.getElementById('subscribe-button')).remove();
+      (document.getElementById('unsubscribe-button')).remove();
 	  	document.getElementById('profilesubmit').addEventListener('click', function(event){
 	  		submitNewProfile(user);
 	  		}
-	  		);
+	  	);
 	  	document.getElementById('editdisplayname').innerHTML = user.name;
 	  	document.getElementById('editbio').innerHTML = user.bio;
 	  }
@@ -123,7 +136,7 @@ function popProfile(u) {
             console.log('hihihihihihihihi');
             profilePic.setAttribute('src', user.image_url);
             //test
-            profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
+            // profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
             profileDiv.appendChild(profilePic);
           }
           //default profile image

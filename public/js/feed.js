@@ -1,5 +1,3 @@
-// const api = require('./routes/api.js');
-
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);

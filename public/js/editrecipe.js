@@ -1,4 +1,4 @@
-
+ 
 function popRecipe(recipe) {
   console.log("populating");
   const titleDiv = document.getElementById('recipetitle');
@@ -16,7 +16,7 @@ function popRecipe(recipe) {
 
 
 function submitRecipeEdit() {
-  // TO BE IMPLEMENTED:
+  // TO BE IMPLEMENTED: 
   // submit the story to our newly implemented database
   const parent = window.location.search.substring(1);
   const rtitle = document.getElementById('recipetitle').value;
