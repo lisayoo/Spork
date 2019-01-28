@@ -1,5 +1,6 @@
 // dependencies
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const connect = require('connect-ensure-login');
 
@@ -30,9 +31,41 @@ router.get('/user', function(req, res) {
 });
 
 router.get('/recipes', function(req, res) {
-  console.log(req.query);
-  Recipe.findById(req.query._id, function(err, recipe) {
-    if (err) {
+  console.log("REQUEST RECIPE ID: " + req.query._id);
+  // {
+  //   $graphLookup: {
+  //   from: 'recipes', // Explore the movies collection
+  //   startWith: '$forks', // Start with movies that contain Arnold's _id
+  //   connectFromField: 'forks', // Match actors in one movie...
+  //   connectToField: '_id', // to actors in another movie
+  //   as: 'forks',
+  //   depthField: 'steps'
+  // }}
+
+
+
+  // Recipe.aggregate([
+  //   { $match : 
+  //     { _id: mongoose.Types.ObjectId(req.query._id) }},
+  //   { $graphLookup: 
+  //     { from: 'recipes', // Explore the movies collection
+  //       startWith: '$forks', // Start with movies that contain Arnold's _id
+  //       connectFromField: 'forks', // Match actors in one movie...
+  //       connectToField: '_id', // to actors in another movie
+  //       as: 'tree',
+  //       depthField: 'depth'}}
+  //   ], 
+  //   function(err, tree){
+  //         console.log('TREE IS: ');
+  //         for (i =0; i< tree[0].tree.length; i++){
+  //         console.log(tree[0].tree[i]);
+  //     }
+  //     } );
+
+
+  Recipe.findById(req.query._id)
+    .populate({path: 'forks'}).exec((err, recipe) => {
+      if (err) {
           // handle the error
           console.log("An error occured: ", err.message);
     } else if (recipe=== null) {
@@ -40,10 +73,30 @@ router.get('/recipes', function(req, res) {
           // matches the given id
           console.log("No recipe with the given id found.");
     } else {
-          // this means we found the student under name "Aaron"
+      
           res.send(recipe);
-    }
-  });
+
+
+       }
+    });
+
+    
+
+
+  // Recipe.findById(req.query._id, function(err, recipe) {
+  //   if (err) {
+  //         // handle the error
+  //         console.log("An error occured: ", err.message);
+  //   } else if (recipe=== null) {
+  //         // handler the case when no student in the database
+  //         // matches the given id
+  //         console.log("No recipe with the given id found.");
+  //   } else {
+  //         res.send(recipe);
+
+
+  //      }
+  // });
 });
 
 router.get('/feed', function(req, res) {
