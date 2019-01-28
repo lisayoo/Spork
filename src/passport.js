@@ -18,8 +18,18 @@ passport.use(new GoogleStrategy({
       const user = new User({
         name: profile.displayName,
         googleid: profile.id,
-        username: profile.id
+        username: profile.id,
+        // image_url: if (profile.image !== undefined) {profile.image.url;} else {},
       });
+
+      if (profile.image !== undefined) {
+        user.image_url = profile.image.url;
+      }
+      else {
+        user.image_url = ''
+      }
+
+
 
       user.save(function(err) {
         if (err) console.log(err);

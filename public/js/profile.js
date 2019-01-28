@@ -46,6 +46,9 @@ function popProfile(u) {
   const titleDiv = document.getElementById('name');
   const descDiv = document.getElementById('bio');
   const recipeCard =document.getElementById('recipes');
+  const profileDiv = document.getElementById('profile-image');
+  const profilePic = document.createElement("img");
+  console.log(profilePic);
   if (u !== ""){
   	currentUser = "";
   	get('/api/whoami', {}, function(user) {
@@ -55,6 +58,21 @@ function popProfile(u) {
     console.log("getting specific user from url");
     titleDiv.innerHTML = user.name;
     descDiv.innerHTML = user.bio;
+
+    if (user.image_url !== ''){
+      console.log('hihihihihihihihi');
+      profilePic.setAttribute('src', user.image_url);
+      //test
+      profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
+      profileDiv.appendChild(profilePic);
+    }
+      //default profile image
+    else{
+      console.log('this is logical i should be here');
+      const defaultDiv = document.createElement('div');
+      defaultDiv.className = 'face';
+      profileDiv.appendChild(defaultDiv);
+    }
     if (user.recipes !== []){
       recipeCard.innerHTML = "";
       console.log(user.recipes);
@@ -84,14 +102,30 @@ function popProfile(u) {
 	} else {
 
 		get('/api/whoami', {}, function(user) {
-        console.log("USER'S NAME IS");
-		    console.log(user.name);
 		    if (user._id !== undefined){
 		    	titleDiv.innerHTML = user.name;
 		    	descDiv.innerHTML = user.bio;
+          console.log('i am outside');
+
+          if (user.image_url !== ''){
+            console.log('hihihihihihihihi');
+            profilePic.setAttribute('src', user.image_url);
+            //test
+            profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
+            profileDiv.appendChild(profilePic);
+          }
+          //default profile image
+          else{
+            console.log('this is logical i should be here');
+            const defaultDiv = document.createElement('div');
+            defaultDiv.className = 'face';
+            profileDiv.appendChild(defaultDiv);
+          }
+
+          // document.getElementById('profile-image').appendChild(profilePic);
 		    	if (user.recipes !== []){
            			 recipeCard.innerHTML = "";
-		    		console.log(user.recipes);
+		    		console.log('hi'+user.recipes);
 		    		for (let i = 0; i < user.recipes.length; i++) {
      					const currentStory = get('/api/recipes', {_id: user.recipes[i]}, function(currentStory) {
       					recipeCard.prepend(storyDOMObject(currentStory));
