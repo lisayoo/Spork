@@ -1,12 +1,4 @@
 
-
-function submitProfileEdit(user) {
-  // TO BE IMPLEMENTED:
-  // submit the story to our newly implemented database
-
-}	
-
-
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);
@@ -64,8 +56,6 @@ function popProfile(u) {
   	});
     get('/api/user', {_id: u}, function(user) {
     console.log("getting specific user from url");
-  	console.log(user);
-  	console.log(currentUser)
     titleDiv.innerHTML = user.name;
     descDiv.innerHTML = user.bio;
 
@@ -125,8 +115,6 @@ function popProfile(u) {
 	} else {
 
 		get('/api/whoami', {}, function(user) {
-		    console.log(user._id);
-        console.log(user);
 		    if (user._id !== undefined){
 		    	titleDiv.innerHTML = user.name;
 		    	descDiv.innerHTML = user.bio;
