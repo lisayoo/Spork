@@ -23,19 +23,30 @@ function storyDOMObject(storyJSON) {
 }
 
 
-function renderStories() {
+function renderStories(user) {
   console.log('calling renderStories');
   const storiesDiv = document.getElementById('stories');
   console.log('made storiesDiv');
-  get('/api/feed', {}, function(storiesArr) {
-    console.log('successful get request');
-    for (let i = 0; i < storiesArr.length; i++) {
-      const currentStory = storiesArr[i];
-      storiesDiv.prepend(storyDOMObject(currentStory));
-    }
+  get('/api/following', {_id: user._id}, function(followsArr) {
+    for (let i = 0; i < followsArr.length; i++) {
+      const currentUserId = followsArr[i];
+      get('/api/user', {_id: currentUserId}, function(user) {
+        const currentUser = user;
+        for (let j = 0; j < currentUser.recipes.length; j++) {
+          const currentRecipe = get('/api/recipes', {_id: currentUser.recipes[i]}, function(recipe) {
+            storiesDiv.prepend(storyDOMObject(recipe));
+              });
+            }
+          });
+      }
   });
 }
 
-renderStories();
 
+function main() {
+  get('/api/whoami', {}, function(user) {
+    renderStories(user);
+  });
+}
 
+main();

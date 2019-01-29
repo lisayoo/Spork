@@ -50,7 +50,7 @@ router.get('/user', function(req, res) {
 });
 
 router.get('/recipes', function(req, res) {
-  // console.log("REQUEST RECIPE ID: " + req.query._id);
+  console.log("REQUEST RECIPE ID: " + req.query._id);
   // {
   //   $graphLookup: {
   //   from: 'recipes', // Explore the movies collection
@@ -124,6 +124,12 @@ router.get('/feed', function(req, res) {
     console.log("second hello")
     res.send(feed);
   });
+});
+
+router.get('/recipe4user', function(req, res) {
+  Recipe.find({}, function(err, feed) {
+
+  })
 });
 
 router.get('/following', function(req, res) {
