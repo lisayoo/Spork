@@ -48,6 +48,8 @@ body {
 	text-decoration: none;
 	color:#485863;
 }
+
+
 .bigger-button:hover, .bigger-button:active{
 	background-color: #e8c0a0;
 	text-decoration: none;
@@ -68,14 +70,16 @@ body {
 }
 .navbar-custom .navbar-brand{
 	color:#F9EDD4;
+	text-decoration: none;c
 	margin-left: 5%;
 	font-size: 30px;
 
 }
 
 .navbar-brand:hover, .navbar-brand:active{
-	text-decoration: none;
+	
 	color:#f3daa5;
+
 }
 
 .profile-icon {
@@ -155,6 +159,11 @@ body {
 	margin: 20px;
 }
 
+.buttons{
+	margin: 20px;
+	
+}
+
 .face {
 	position: relative;
 	display: inline-block;
@@ -209,10 +218,10 @@ body {
 .card {
 	margin: 25px;
 	width: 400px;
-	height: 500px;
+	height: auto;
 	border-radius: 20px;
 	text-align: center;
-	background-color: #cbbeb5;
+	background-color: #e8c0a0;
 	font-size: 20px;
 	border: none;
 }
@@ -224,7 +233,7 @@ body {
 }
 
 .divider {
-	width: 500px;
+	width:10%;
 }
 
 /*recipe card classes*/
@@ -263,6 +272,8 @@ body {
 	padding: 50px;
 	border-radius: 50px;
 }
+
+
 
 /* add recipe page */
 .recipe-container {
@@ -369,6 +380,11 @@ input[type=password] {
 	padding: 1rem 0;
 }
 
+.feed-image {
+	width: 15%;
+	height: 15%;
+	border-radius: 7%;
+}
 .error-message {
 	align-content: center;
 }

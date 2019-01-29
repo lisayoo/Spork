@@ -16,7 +16,12 @@ function submitNewRecipe(user) {
     "rs": rsteps  };
   console.log(data);
   post('/api/newrecipe', data);
+  window.location.href = '/feed';
 }
 
+function redirectHome(){
+  console.log('redirecting');
+  window.location.href = '/feed';
+}
 // let submit = document.getElementById("recipesubmit")
 // submit.addEventListener("click", submitNewRecipe);

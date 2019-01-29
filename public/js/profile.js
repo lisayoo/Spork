@@ -75,7 +75,7 @@ function popProfile(u) {
   const followers = document.getElementById('followers');
 
   if (u !== ""){
-  	currentUser = "";
+  	let currentUser = "";
   	get('/api/whoami', {}, function(user) {
   		currentUser = user;
   	});
@@ -83,8 +83,8 @@ function popProfile(u) {
     console.log("getting specific user from url");
     titleDiv.innerHTML = user.name;
     descDiv.innerHTML = user.bio;
-    following.setAttribute('href', '/u/following?' + user._id);
-    followers.setAttribute('href', '/u/followers?' + user._id);
+    following.setAttribute('href', '/following?' + user._id);
+    followers.setAttribute('href', '/followers?' + user._id);
     if (user.image_url !== ''){
       // console.log('hihihihihihihihi');
 
@@ -122,30 +122,9 @@ function popProfile(u) {
 	  if (currentUser !== user){
 	  	(document.getElementById('editprofilebutton')).remove();
 	  	(document.getElementById('modal')).remove();
+      (document.getElementById('picmodal')).remove();
 
-      if (user._id in currentUser.following) {
-        console.log('i am following this person');
-        const unsubButton = document.createElement('a');
-        unsubButton.setAttribute('href', '#');
-        unsubButton.className = 'big-button follow-button';
-        unsubButton.innerHTML = 'unsubscribe';
-        unsubButton.setAttribute('id', 'unsubscribe-button');
-        const subDiv = document.getElementById('subscribe-unsubscribe');
-        subDiv.appendChild(unsubButton);
-        // <a id = 'unsubscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> unsubscribe </a>
-      }
-      else {
-        console.log('i am not following this person');
-        const subButton = document.createElement('a');
-        subButton.setAttribute('href', '#');
-        subButton.className = 'big-button follow-button';
-        subButton.innerHTML = 'subscribe';
-        subButton.setAttribute('id', 'subscribe-button');
-        const subDiv = document.getElementById('subscribe-unsubscribe');
-        subDiv.appendChild(subButton);
-        // <a id ='subscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> subscribe </a> 
 
-      }
       
       const profileContainer = document.getElementById('profile-container');
       const subscribe = document.createElement('a');
@@ -184,7 +163,8 @@ function popProfile(u) {
           // followers.setAttribute('href', '/u/followers?' + user._id);
           // console.log(following.href);
           // console.log(followers.href);
-
+              following.setAttribute('href', '/following?' + user._id);
+    followers.setAttribute('href', '/followers?' + user._id);
 		    	titleDiv.innerHTML = user.name;
 		    	descDiv.innerHTML = user.bio;
           console.log('i am outside');
@@ -232,10 +212,11 @@ function popProfile(u) {
 
 
 }
+
 const profileId = window.location.search.substring(1);
 profilePic = document.getElementById('photo-submit');
       document.getElementById('photo-submit').addEventListener('click', function(event){
         document.getElementById('picmodal').style.display = "none";
    }
   );
-window.onload = function(event){(popProfile(profileId));}
+// window.onload = function(event){(popProfile(profileId));}

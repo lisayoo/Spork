@@ -132,11 +132,12 @@ router.get('/recipe4user', function(req, res) {
   })
 });
 
-router.get('/following', function(req, res) {
+router.get('/following',  function(req, res) {
   const desiredUser = req.query;
   console.log('desiredUser:' + desiredUser);
   console.log('getting list of following');
-  User.findOne({_id: desiredUser}, function(err, user) {
+  console.log(desiredUser._id);
+  User.findOne({_id: desiredUser._id}, function(err, user) {
     console.log('V IMPT' + user._id);
     console.log('what about my following' + user.following);
     res.send(user.following);
@@ -147,7 +148,7 @@ router.get('/followers', function(req, res) {
   const desiredUser = req.query;
   console.log('desiredUser:' + desiredUser);
   console.log('getting list of followers');
-  User.findOne({_id: desiredUser}, function(err, user) {
+  User.findOne({_id: desiredUser._id}, function(err, user) {
     console.log(user);
     res.send(user.followers);
   });

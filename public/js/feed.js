@@ -2,10 +2,12 @@ function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);
   card.className = 'story';
-
+  const container = document.createElement('div');
+  container.className = "flex-container container";
+  card.appendChild(container);
   const cardBody = document.createElement('div');
   cardBody.className = 'card-body';
-  card.appendChild(cardBody);
+  container.appendChild(cardBody);
 
   const contentSpan = document.createElement('a');
   contentSpan.className = 'story-content card-title';
@@ -18,6 +20,13 @@ function storyDOMObject(storyJSON) {
   creatorSpan.innerHTML = storyJSON.authorname;
   creatorSpan.setAttribute('href', '/u/profile?' + storyJSON.author);
   cardBody.appendChild(creatorSpan);
+
+  if (storyJSON.image_url !== ''){
+    const image = document.createElement('img');
+    image.setAttribute('src', storyJSON.image_url);
+    image.className = 'feed-image';
+    container.appendChild(image);
+  }
 
   return card;
 }
