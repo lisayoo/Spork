@@ -96,10 +96,10 @@ function popProfile(u) {
 	  	(document.getElementById('editprofilebutton')).remove();
 	  	(document.getElementById('modal')).remove();
       if (user._id in currentUser.following) {
-        (document.getElementById('unsubscribe-button')).remove();
+        (document.getElementById('subscribe-button')).remove();
       }
       else {
-        (document.getElementById('subscribe-button')).remove();
+        (document.getElementById('unsubscribe-button')).remove();
       }
       
       const profileContainer = document.getElementById('profile-container');

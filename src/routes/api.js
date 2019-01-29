@@ -233,11 +233,11 @@ router.post(
   function(req, res) {
     console.log('UNSUBSCRIBE >:(');
     User.findOne({ _id: req.user._id },function(err,user) {
-      user.following.remove(req.body.id);
+      user.following.pull(req.body.id);
       console.log('my following' + user.following);
        user.save();
       User.findOne({_id: req.body.id}, function(err,them) {
-        them.followers.remove(req.user._id);
+        them.followers.pull(req.user._id);
         console.log('their followers' + them.followers);
         them.save();
       });
