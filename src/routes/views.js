@@ -49,6 +49,10 @@ router.get('/404', function(req, res) {
   res.sendFile('404.html', { root: 'src/views' });
 });
 
+router.get('/subfeed', function(req, res) {
+  res.sendFile('subfeed.html', { root: 'src/views'});
+})
+
 // router.get('/newrecipe', function(req, res, next) {
 //   res.sendFile('index.html', { root: 'src/views' });
 // });

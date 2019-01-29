@@ -54,10 +54,10 @@ app.use('/static', express.static('public'));
 
 // 404 route
 app.use(function(req, res, next) {
+  // res.redirect('/404');
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
-
 });
 
 // route error handler

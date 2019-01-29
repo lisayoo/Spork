@@ -70,6 +70,10 @@ function popProfile(u) {
   const profileDiv = document.getElementById('profile-image');
   const profilePic = document.createElement("img");
   console.log(profilePic);
+
+  const following = document.getElementById('following');
+  const followers = document.getElementById('followers');
+
   if (u !== ""){
   	currentUser = "";
   	get('/api/whoami', {}, function(user) {
@@ -79,7 +83,8 @@ function popProfile(u) {
     console.log("getting specific user from url");
     titleDiv.innerHTML = user.name;
     descDiv.innerHTML = user.bio;
-
+    following.setAttribute('href', '/u/following?' + user._id);
+    followers.setAttribute('href', '/u/followers?' + user._id);
     if (user.image_url !== ''){
       // console.log('hihihihihihihihi');
 
@@ -91,9 +96,7 @@ function popProfile(u) {
     }
       //default profile imageboop
     else{
-      console.log('this is logical i should be here');
       const defaultDiv = document.createElement('div');
-      defaultDiv.className = 'face';
       profileDiv.appendChild(defaultDiv);
     }
     if (user.recipes !== []){
@@ -105,28 +108,65 @@ function popProfile(u) {
 	            });
 	        }
 	      }
-	  if (currentUser._id !== user._id){
-      console.log('not same user');
-	  	document.getElementById('editprofilebutton').remove();
-	  	document.getElementById('modal').remove();
+// <<<<<<< HEAD
+// 	  if (currentUser._id !== user._id){
+//       console.log('not same user');
+// 	  	document.getElementById('editprofilebutton').remove();
+// 	  	document.getElementById('modal').remove();
+//       if (user._id in currentUser.following) {
+//         document.getElementById('subscribe-button').remove();
+//       }
+//       else {
+//         document.getElementById('unsubscribe-button').remove();
+// =======
+	  if (currentUser !== user){
+	  	(document.getElementById('editprofilebutton')).remove();
+	  	(document.getElementById('modal')).remove();
+
       if (user._id in currentUser.following) {
-        document.getElementById('subscribe-button').remove();
+        console.log('i am following this person');
+        const unsubButton = document.createElement('a');
+        unsubButton.setAttribute('href', '#');
+        unsubButton.className = 'big-button follow-button';
+        unsubButton.innerHTML = 'unsubscribe';
+        unsubButton.setAttribute('id', 'unsubscribe-button');
+        const subDiv = document.getElementById('subscribe-unsubscribe');
+        subDiv.appendChild(unsubButton);
+        // <a id = 'unsubscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> unsubscribe </a>
       }
       else {
-        document.getElementById('unsubscribe-button').remove();
+        console.log('i am not following this person');
+        const subButton = document.createElement('a');
+        subButton.setAttribute('href', '#');
+        subButton.className = 'big-button follow-button';
+        subButton.innerHTML = 'subscribe';
+        subButton.setAttribute('id', 'subscribe-button');
+        const subDiv = document.getElementById('subscribe-unsubscribe');
+        subDiv.appendChild(subButton);
+        // <a id ='subscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> subscribe </a> 
+
       }
       
       const profileContainer = document.getElementById('profile-container');
       const subscribe = document.createElement('a');
+// <<<<<<< HEAD
 
+
+// 	  } else {
+//       document.getElementById('subscribe-button').remove();
+//       document.getElementById('unsubscribe-button').remove();
+// 	  	// document.getElementById('profilesubmit').addEventListener('click', function(event){
+// 	  	// 	submitNewProfile(user);
+// 	  	// 	}
+// 	  	// );
+// =======
 
 	  } else {
-      document.getElementById('subscribe-button').remove();
-      document.getElementById('unsubscribe-button').remove();
-	  	// document.getElementById('profilesubmit').addEventListener('click', function(event){
-	  	// 	submitNewProfile(user);
-	  	// 	}
-	  	// );
+	  	document.getElementById('profilesubmit').addEventListener('click', function(event){
+	  		submitNewProfile(user);
+	  		}
+	  	);
+// >>>>>>> 0c0082735d4a23d5fe7253d0af34ffabe55f8d41
 	  	document.getElementById('editdisplayname').innerHTML = user.name;
 	  	document.getElementById('editbio').innerHTML = user.bio;
 	  }
@@ -140,6 +180,10 @@ function popProfile(u) {
 
 		get('/api/whoami', {}, function(user) {
 		    if (user._id !== undefined){
+          // following.setAttribute('href', '/u/following?' + user._id);
+          // followers.setAttribute('href', '/u/followers?' + user._id);
+          // console.log(following.href);
+          // console.log(followers.href);
 
 		    	titleDiv.innerHTML = user.name;
 		    	descDiv.innerHTML = user.bio;

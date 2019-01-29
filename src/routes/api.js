@@ -126,6 +126,34 @@ router.get('/feed', function(req, res) {
   });
 });
 
+router.get('/recipe4user', function(req, res) {
+  Recipe.find({}, function(err, feed) {
+
+  })
+});
+
+router.get('/following', function(req, res) {
+  const desiredUser = req.query;
+  console.log('desiredUser:' + desiredUser);
+  console.log('getting list of following');
+  User.findOne({_id: desiredUser}, function(err, user) {
+    console.log('V IMPT' + user._id);
+    console.log('what about my following' + user.following);
+    res.send(user.following);
+  });
+});
+
+router.get('/followers', function(req, res) {
+  const desiredUser = req.query;
+  console.log('desiredUser:' + desiredUser);
+  console.log('getting list of followers');
+  User.findOne({_id: desiredUser}, function(err, user) {
+    console.log(user);
+    res.send(user.followers);
+  });
+});
+
+
 // router.get('/search', function(req, res) {
 //   User.find( {name: req.query.key}, function(err, results) {
 //     if (err) {
@@ -373,5 +401,44 @@ router.post('/profilepic', connect.ensureLoggedIn(),  profile_parser.single("ima
 //   });
 //   }
 // );
+
+
+router.post(
+  '/subscribe',
+  connect.ensureLoggedIn(),
+  function(req, res) {
+    console.log('i am trying to subscribe!!!');
+    User.findOne({ _id: req.user._id },function(err,user) {
+      user.following.addToSet(req.body.id);
+      console.log('my following' + user.following);
+       user.save();
+      User.findOne({_id: req.body.id}, function(err,them) {
+        them.followers.addToSet(req.user._id);
+        console.log('their followers' + them.followers);
+        them.save();
+      });
+    });
+  res.send({});
+});
+
+router.post(
+  '/unsubscribe',
+  connect.ensureLoggedIn(),
+  function(req, res) {
+    console.log('UNSUBSCRIBE >:(1111111');
+    console.log('req.user._id' + req.user._id);
+    console.log('req.body,id' + req.body.id);
+
+    User.findOneAndUpdate( { _id: req.user._id}, { $pullAll: { following: [req.body.id] } }, { new: true }, 
+      function(err, data) {} 
+    );
+
+    console.log('hi');
+    User.findOneAndUpdate( { _id: req.body.id}, { $pullAll: { followers: [req.user._id]}}, { new: true },
+      function(err, data) {}
+    );
+  res.send({});
+});
+
 
 module.exports = router;
