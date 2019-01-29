@@ -32,23 +32,31 @@
 
 	<!-- profile -->
 	<div class="flex-container">
-		<div class="profile-image" id="profile-image">
-			<!-- <input style ="display:none;" id = "new-photo" name = "new-photo" type= "file"/> -->
+
+		<div class="profile-image" id="profile-image" onclick="document.getElementById('picmodal').style.display='block'" >
+		<div class="w3-modal flex-container center" id = "picmodal">
+			<div class = "view-container">
+				<span onclick="document.getElementById('picmodal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+				<form action='/api/profilepic' method="post" enctype="multipart/form-data">
+					<input id = "image" name = "image" type= "file"/>
+					<input onclick="document.getElementById('picmodal').style.display='none'" id ="photo-submit" type ="submit"/>
+				</form>
+			</div>
+		</div>
 		</div>
 		<div name = "name" id = "name" class="profile-text">username</div>
 		<div name = "name" id = "bio" class="bio-text">bio</div>
 
 		<div class="divider"></div>
 
-		<a onclick="document.getElementById('modal').style.display='block'" class="big-button follow-button" id = "editprofilebutton"> edit profile </a> 
+		<a onclick="document.getElementById('modal').style.display='block'" class="big-button follow-button" id = "editprofilebutton"> edit your deets </a> 
 		<a class="big-button follow-button" href="/followers"> followers </a> 
 		<a class="big-button follow-button" href="/following"> following </a> 
 	</div> 
 
 	<div class="w3-modal flex-container center" id = "modal">
 		<div class = "view-container">
-			<span onclick="document.getElementById('modal').style.display='none'" 
-      class="w3-button w3-display-topright">&times;</span>
+			<span onclick="document.getElementById('modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 			<form>
 				<br><input id = "editdisplayname" type="text" name="name" placeholder="display name"><br>
 				<br><textarea id="editbio" placeholder="add a bio!"></textarea><br>

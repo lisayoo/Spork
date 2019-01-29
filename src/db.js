@@ -25,3 +25,4 @@ cloudinary.config({
 	api_key: '931476311764324',
 	api_secret: 'UzuJ9BZe7ERB83QuBV7la1DhSJc'
 })
+

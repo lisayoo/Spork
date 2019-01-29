@@ -1,5 +1,8 @@
 // dependencies
 const express = require('express');
+const cloudinary = require('cloudinary');
+const multer = require("multer");
+const cloudinaryStorage = require("multer-storage-cloudinary");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const connect = require('connect-ensure-login');
@@ -13,6 +16,22 @@ const router = express.Router()
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+const profile_storage = cloudinaryStorage({
+cloudinary: cloudinary,
+folder: "profiles",
+allowedFormats: ["jpg", "png"],
+transformation: [{ width: 200, height: 200, crop: "crop", gravity: "face"}]
+});
+
+const recipe_pic_storage = cloudinaryStorage({
+cloudinary: cloudinary,
+folder: "recipe_pics",
+allowedFormats: ["jpg", "png"],
+transformation: [{ width: 500, height: 500, crop: "limit"}]
+});
+
+const profile_parser = multer({ storage: profile_storage });
+const recipe_parser = multer({ storage: recipe_pic_storage });
 
 // api endpoints
 router.get('/whoami', function(req, res) {
@@ -224,6 +243,22 @@ router.post('/editprofile', function(req, res) {
   });
   
 });
+
+router.post('/profilepic', connect.ensureLoggedIn(),  profile_parser.single("image"), function(req,res){
+  User.findOne({ _id: req.user._id }, function(err,user) {
+     user.set({image_url: req.file.secure_url});
+     user.save();
+  });
+  console.log("successfully set propic");
+  //console.log(req.body.pic);
+  // cloudinary.uploader.upload(req.body.pic.name, function(result){
+  //   User.findById(req.user._id, function(err, user) {
+  //     user.set({image_url: result.url});
+  //     user.save();
+  //     console.log(result.url);
+  //   });
+  // });
+});
 // router.post(
 //   '/editpropic',
 //   // connect.ensureLoggedIn(),
@@ -250,4 +285,4 @@ router.post('/editprofile', function(req, res) {
 //   }
 // );
 
-module.exports = router;
+module.exports = router;{}
