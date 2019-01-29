@@ -37,6 +37,27 @@ function submitNewProfile(user) {
   post('/api/editprofile', data);
 }
 
+function newProPic(){
+
+  const photograph = document.getElementById('image');
+  console.log("PHOTOGRAPH INFO");
+  console.log(photograph.files);
+  console.log(photograph.value);
+
+  const data = {
+    'pic' : photograph.value
+  };
+  // cloudinary.uploader.upload(req.body.pic.name, function(result){
+  //   User.findById(req.user._id, function(err, user) {
+  //     user.set({image_url: result.url});
+  //     user.save();
+  //     console.log(result.url);
+  //   });
+  // });
+  window.location = '/u/profile';
+  //post('/api/imagetest', data);
+}
+
 // let submit = document.getElementById("profile-image")
 // submit.addEventListener("click", submitNewProfile);
 
@@ -49,21 +70,31 @@ function popProfile(u) {
   const profileDiv = document.getElementById('profile-image');
   const profilePic = document.createElement("img");
   console.log(profilePic);
+
+  const following = document.getElementById('following');
+  const followers = document.getElementById('followers');
+
   if (u !== ""){
   	currentUser = "";
   	get('/api/whoami', {}, function(user) {
   		currentUser = user;
+      console.log(user._id);
   	});
     get('/api/user', {_id: u}, function(user) {
     console.log("getting specific user from url");
     titleDiv.innerHTML = user.name;
     descDiv.innerHTML = user.bio;
+    following.setAttribute('href', '/u/following?' + user._id);
+    followers.setAttribute('href', '/u/followers?' + user._id);
+    console.log(following.href);
+    console.log(followers.href);
 
     if (user.image_url !== ''){
-      console.log('hihihihihihihihi');
-      profilePic.setAttribute('src', user.image_url);
+      // console.log('hihihihihihihihi');
+
+      // profilePic.setAttribute('src', user.image_url);
       //test
-      // profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
+      profilePic.setAttribute('src', user.image_url);
       profileDiv.appendChild(profilePic);
     }
       //default profile image
@@ -116,15 +147,25 @@ function popProfile(u) {
 
 		get('/api/whoami', {}, function(user) {
 		    if (user._id !== undefined){
+          // following.setAttribute('href', '/u/following?' + user._id);
+          // followers.setAttribute('href', '/u/followers?' + user._id);
+          // console.log(following.href);
+          // console.log(followers.href);
+
 		    	titleDiv.innerHTML = user.name;
 		    	descDiv.innerHTML = user.bio;
           console.log('i am outside');
-
+          document.getElementById('profilesubmit').addEventListener('click', function(event){
+            submitNewProfile(user);
+          });     
+          document.getElementById('editdisplayname').value = user.name;
+          document.getElementById('editbio').value= user.bio;
           if (user.image_url !== ''){
             console.log('hihihihihihihihi');
             profilePic.setAttribute('src', user.image_url);
+            profilePic.style.borderRadius = "50%";
             //test
-            // profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
+
             profileDiv.appendChild(profilePic);
           }
           //default profile image
@@ -145,11 +186,7 @@ function popProfile(u) {
       						});
     					}
 		    		}
-		    	document.getElementById('profilesubmit').addEventListener('click', function(event){
-		  			submitNewProfile(user);
-		  		});	  	
-		  		document.getElementById('editdisplayname').innerHTML = user.name;
-	  			document.getElementById('editbio').innerHTML = user.bio;
+
 		    
 		    } else {
 				window.location.replace('/auth/google');
@@ -163,4 +200,9 @@ function popProfile(u) {
 
 }
 const profileId = window.location.search.substring(1);
+profilePic = document.getElementById('photo-submit');
+      document.getElementById('photo-submit').addEventListener('click', function(event){
+        document.getElementById('picmodal').style.display = "none";
+   }
+  );
 window.onload = function(event){(popProfile(profileId));}

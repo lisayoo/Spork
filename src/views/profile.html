@@ -31,25 +31,38 @@
 
 	<!-- profile -->
 	<div class="flex-container">
-		<div class="profile-image" id="profile-image">
-			<!-- <input style ="display:none;" id = "new-photo" name = "new-photo" type= "file"/> -->
+
+		<div class="profile-image" id="profile-image" onclick="document.getElementById('picmodal').style.display='block'" >
+		<div class="w3-modal flex-container center" id = "picmodal">
+			<div class = "view-container">
+				<span onclick="document.getElementById('picmodal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+				<form action='/api/profilepic' method="post" enctype="multipart/form-data">
+					<input id = "image" name = "image" type= "file"/>
+					<input onclick="document.getElementById('picmodal').style.display='none'" id ="photo-submit" type ="submit"/>
+				</form>
+			</div>
+		</div>
 		</div>
 		<div name = "name" id = "name" class="profile-text">username</div>
 		<div name = "name" id = "bio" class="bio-text">bio</div>
 
 		<div class="divider"></div>
 
+
 		<a onclick="document.getElementById('modal').style.display='block'" class="big-button follow-button" id = "editprofilebutton"> edit profile </a> 
 		<a id ='subscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> subscribe </a> 
 		<a id = 'unsubscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> unsubscribe </a>
-		<a class="big-button follow-button" href="/u/followers"> followers </a> 
-		<a class="big-button follow-button" href="/u/following"> following </a> 
+		<div id="follower-box">
+			<a class="big-button follow-button" id='followers'> followers </a>
+		</div>
+ 		<div id="following-box">
+			<a class="big-button follow-button" id='following'> following </a>
+		</div>
 	</div> 
 
 	<div class="w3-modal flex-container center" id = "modal">
 		<div class = "view-container">
-			<span onclick="document.getElementById('modal').style.display='none'" 
-      class="w3-button w3-display-topright">&times;</span>
+			<span onclick="document.getElementById('modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 			<form>
 				<br><input id = "editdisplayname" type="text" name="name" placeholder="display name"><br>
 				<br><textarea id="editbio" placeholder="add a bio!"></textarea><br>

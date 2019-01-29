@@ -335,3 +335,24 @@ input[type=password] {
 	align-content: center;
 }
 
+/* following */
+#followers {
+	align-content: center;
+}
+
+#following {
+	align-content: center;
+}
+
+.follower {
+	background-color: #F6CBA7;
+	border-radius: 20px;
+	margin: 10px;
+	padding: 10px;
+	height: auto;
+}
+
+
+
+
+

@@ -1,5 +1,8 @@
 // dependencies
 const express = require('express');
+const cloudinary = require('cloudinary');
+const multer = require("multer");
+const cloudinaryStorage = require("multer-storage-cloudinary");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const connect = require('connect-ensure-login');
@@ -13,6 +16,22 @@ const router = express.Router()
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+const profile_storage = cloudinaryStorage({
+cloudinary: cloudinary,
+folder: "profiles",
+allowedFormats: ["jpg", "png"],
+transformation: [{ width: 200, height: 200, crop: "crop", gravity: "face"}]
+});
+
+const recipe_pic_storage = cloudinaryStorage({
+cloudinary: cloudinary,
+folder: "recipe_pics",
+allowedFormats: ["jpg", "png"],
+transformation: [{ width: 500, height: 500, crop: "limit"}]
+});
+
+const profile_parser = multer({ storage: profile_storage });
+const recipe_parser = multer({ storage: recipe_pic_storage });
 
 // api endpoints
 router.get('/whoami', function(req, res) {
@@ -100,28 +119,40 @@ router.get('/recipes', function(req, res) {
 });
 
 router.get('/feed', function(req, res) {
-  // var currentLocation = window.location;
-  // console.log('currentLocation.href');
-  // console.log(currentLocation.href);
+  console.log("first hello")
   Recipe.find({}, function(err, feed) {
+    console.log("second hello")
     res.send(feed);
   });
 });
 
 router.get('/following', function(req, res) {
+  const desiredUser = req.query;
+  console.log('desiredUser:' + desiredUser);
   console.log('getting list of following');
-  User.find({_id: { $in: req.query.following }}, function(err, following) {
-    res.send(following);
+  User.findOne({_id: desiredUser}, function(err, user) {
+    console.log('V IMPT' + user._id);
+    console.log('what about my following' + user.following);
+    res.send(user.following);
   });
 });
 
 router.get('/followers', function(req, res) {
+  const desiredUser = req.query;
+  console.log('desiredUser:' + desiredUser);
   console.log('getting list of followers');
-  User.find({_id: { $in: req.query.followers }}, function(err, followers) {
-    res.send(followers);
+  User.findOne({_id: desiredUser}, function(err, user) {
+    console.log(user);
+    res.send(user.followers);
   });
 });
 
+// router.get('/followers', function(req, res) {
+//   console.log('getting list of followers');
+//   User.find({_id: { $in: req.query.followers }}, function(err, followers) {
+//     res.send(followers);
+//   });
+// });
 // router.get('/search', function(req, res) {
 //   User.find( {name: req.query.key}, function(err, results) {
 //     if (err) {
@@ -197,6 +228,8 @@ router.post('/editrecipe', function(req, res) {
         'steps': req.body.rs,
       });
 
+      // user.recipes.addTOSet(recipe._id);
+      // user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
       toPost.save(function(err,recipe) {
         // configure socketio
         if (err) console.log(err);
@@ -204,7 +237,7 @@ router.post('/editrecipe', function(req, res) {
 
       editId = toPost._id
     user.recipes.push(editId);
-
+  // Recipe.findById(req.query.p, function(err, recipe) {
   Recipe.findById(req.body.p, function(err, recipe) {
     if (err) {
           // handle the error
@@ -235,6 +268,23 @@ router.post('/editprofile', function(req, res) {
       user.set({bio: req.body.b});
       user.save();
   });
+  
+});
+
+router.post('/profilepic', connect.ensureLoggedIn(),  profile_parser.single("image"), function(req,res){
+  User.findOne({ _id: req.user._id }, function(err,user) {
+     user.set({image_url: req.file.secure_url});
+     user.save();
+  });
+  console.log("successfully set propic");
+  //console.log(req.body.pic);
+  // cloudinary.uploader.upload(req.body.pic.name, function(result){
+  //   User.findById(req.user._id, function(err, user) {
+  //     user.set({image_url: result.url});
+  //     user.save();
+  //     console.log(result.url);
+  //   });
+  // });
 });
 // router.post(
 //   '/editpropic',
@@ -299,6 +349,3 @@ router.post(
 });
 
 module.exports = router;
-
-
-
