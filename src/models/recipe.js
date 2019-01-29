@@ -32,8 +32,7 @@ const recipeSchema = new mongoose.Schema ({
 	steps: {type: String, default: ''},
 	forks: [{type: mongoose.Schema.Types.ObjectId, ref:"recipe"}]
 
-
 });
 
 const recipe = mongoose.model("recipe", recipeSchema);
-module.exports = recipe;
+module.exports = recipe; 

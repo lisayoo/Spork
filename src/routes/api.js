@@ -285,4 +285,40 @@ router.post('/profilepic', connect.ensureLoggedIn(),  profile_parser.single("ima
 //   }
 // );
 
-module.exports = router;{}
+router.post(
+  '/subscribe',
+  connect.ensureLoggedIn(),
+  function(req, res) {
+    console.log('i am trying to subscribe!!!');
+    User.findOne({ _id: req.user._id },function(err,user) {
+      user.following.push(req.body.id);
+      console.log('my following' + user.following);
+       user.save();
+      User.findOne({_id: req.body.id}, function(err,them) {
+        them.followers.push(req.user._id);
+        console.log('their followers' + them.followers);
+        them.save();
+      });
+    });
+  res.send({});
+});
+
+router.post(
+  '/unsubscribe',
+  connect.ensureLoggedIn(),
+  function(req, res) {
+    console.log('UNSUBSCRIBE >:(');
+    User.findOne({ _id: req.user._id },function(err,user) {
+      user.following.pull(req.body.id);
+      console.log('my following' + user.following);
+       user.save();
+      User.findOne({_id: req.body.id}, function(err,them) {
+        them.followers.pull(req.user._id);
+        console.log('their followers' + them.followers);
+        them.save();
+      });
+    });
+  res.send({});
+});
+
+module.exports = router;

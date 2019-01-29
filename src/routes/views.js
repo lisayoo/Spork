@@ -34,7 +34,19 @@ router.get('/feed', function(req, res) {
 });
 
 router.get('/search', function (req, res) {
-	res.sendFile('search.html', { root: 'src/view' });
+	res.sendFile('search.html', { root: 'src/views' });
+});
+
+router.get('/u/followers', function(req, res) {
+  res.sendFile('followers.html', { root: 'src/views' });
+});
+
+router.get('/u/following', function(req, res) {
+  res.sendFile('following.html', { root: 'src/views' });
+});
+
+router.get('/404', function(req, res) {
+  res.sendFile('404.html', { root: 'src/views' });
 });
 
 // router.get('/newrecipe', function(req, res, next) {

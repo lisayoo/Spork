@@ -49,9 +49,12 @@
 
 		<div class="divider"></div>
 
-		<a onclick="document.getElementById('modal').style.display='block'" class="big-button follow-button" id = "editprofilebutton"> edit your deets </a> 
-		<a class="big-button follow-button" href="/followers"> followers </a> 
-		<a class="big-button follow-button" href="/following"> following </a> 
+
+		<a onclick="document.getElementById('modal').style.display='block'" class="big-button follow-button" id = "editprofilebutton"> edit profile </a> 
+		<a id ='subscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> subscribe </a> 
+		<a id = 'unsubscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> unsubscribe </a>
+		<a class="big-button follow-button" href="/u/followers"> followers </a> 
+		<a class="big-button follow-button" href="/u/following"> following </a> 
 	</div> 
 
 	<div class="w3-modal flex-container center" id = "modal">
@@ -81,6 +84,7 @@
 <script src="/static/js/api.js"></script>
 <script src="/static/js/search.js"></script>
 <script src="/static/js/profile.js"></script>
+<script src="/static/js/subscribe.js"></script>
 </body>
 </html>
 
