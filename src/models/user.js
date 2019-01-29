@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
 	bio: String,
 	recipes: {type: Array, of: mongoose.Schema.Types.ObjectId, ref: 'recipe'},
 	followers: {type: Array, of: mongoose.Schema.Types.ObjectId, ref: 'user', unique: true},
-	following: {type: Array, of: mongoose.Schema.Types.ObjectId, ref: 'user', unique: true}
+	following: {type: Array, of: mongoose.Schema.Types.ObjectId, ref: 'user', unique: true},
+	upvoted: {type: Array, of: mongoose.Schema.Types.ObjectId, ref:'recipe',unique: true }
 })
 
 const user = mongoose.model("user", userSchema);

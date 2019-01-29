@@ -26,10 +26,15 @@ const recipeSchema = new mongoose.Schema ({
 	name: {type: String, default: ''},
 	author:{type:String, default:''},
 	authorname:{type:String, default:''},
+	image_url: {type:String, default:''},
 	upload_date: {type: Date, default: Date.now},
 	description: {type: String, default: ''},
 	ingredients: {type: String, default: ''},
 	steps: {type: String, default: ''},
+	upvotes: [{type: mongoose.Schema.Types.ObjectId, unique: true}],
+	downvotes: [{type: mongoose.Schema.Types.ObjectId, unique: true}],
+			
+	parent: {type:  mongoose.Schema.Types.ObjectId},
 	forks: [{type: mongoose.Schema.Types.ObjectId, ref:"recipe"}]
 
 });

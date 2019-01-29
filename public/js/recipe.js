@@ -18,5 +18,5 @@ function submitNewRecipe(user) {
   post('/api/newrecipe', data);
 }
 
-let submit = document.getElementById("recipesubmit")
-submit.addEventListener("click", submitNewRecipe);
+// let submit = document.getElementById("recipesubmit")
+// submit.addEventListener("click", submitNewRecipe);

@@ -24,13 +24,22 @@
 	</nav>
 	<div class = "flex-container container"> 
 	<!-- recipe card -->
+	<div class = "view-container center" id = "image-card"></div>
 	<div class="view-container center" id = 'main-card'>
+
 		<div id = "title" class = "title-text">title</div>
 		<a id = "author">author</a>
 		<div id = "description" class = "card-text section">description</div>
 		<div id = "ingredients" class = "card-text section">ingredients</div>
 		<div style = "margin-bottom: 4%" id = "steps" class = "card-text section">steps</div>
-		<a id = "editbutton" style = "font-weight: bold" class="bigger-button" href="#"> add a fork! </a>
+		<div class= "flex-container container">
+			<a id = "editbutton" style = "font-weight: bold" class="bigger-button" href="#"> add a fork! </a>
+			<div>
+				<span id = "upvote">^</span>
+				<span id = "score"></span>
+				<span id = 'downvote'>v</span>
+			</div>
+		</div>
 	</div>
 	<div class="view-container center" id = 'fork-card'></div>
 </div>

@@ -85,14 +85,11 @@ function popProfile(u) {
 
       // profilePic.setAttribute('src', user.image_url);
       //test
-<<<<<<< HEAD
       profilePic.setAttribute('src', user.image_url);
-=======
-      // profilePic.setAttribute('src', 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/6/28/0/FNK_Apple-Pie_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382545039107.jpeg');
->>>>>>> 2966cb007877e13bc3dcaf2d918eebfeb7385d27
+      profilePic.className = "profile-image"
       profileDiv.appendChild(profilePic);
     }
-      //default profile image
+      //default profile imageboop
     else{
       console.log('this is logical i should be here');
       const defaultDiv = document.createElement('div');
@@ -108,27 +105,28 @@ function popProfile(u) {
 	            });
 	        }
 	      }
-	  if (currentUser !== user){
-	  	(document.getElementById('editprofilebutton')).remove();
-	  	(document.getElementById('modal')).remove();
+	  if (currentUser._id !== user._id){
+      console.log('not same user');
+	  	document.getElementById('editprofilebutton').remove();
+	  	document.getElementById('modal').remove();
       if (user._id in currentUser.following) {
-        (document.getElementById('subscribe-button')).remove();
+        document.getElementById('subscribe-button').remove();
       }
       else {
-        (document.getElementById('unsubscribe-button')).remove();
+        document.getElementById('unsubscribe-button').remove();
       }
       
       const profileContainer = document.getElementById('profile-container');
       const subscribe = document.createElement('a');
-      user.following.pop
+
 
 	  } else {
-      (document.getElementById('subscribe-button')).remove();
-      (document.getElementById('unsubscribe-button')).remove();
-	  	document.getElementById('profilesubmit').addEventListener('click', function(event){
-	  		submitNewProfile(user);
-	  		}
-	  	);
+      document.getElementById('subscribe-button').remove();
+      document.getElementById('unsubscribe-button').remove();
+	  	// document.getElementById('profilesubmit').addEventListener('click', function(event){
+	  	// 	submitNewProfile(user);
+	  	// 	}
+	  	// );
 	  	document.getElementById('editdisplayname').innerHTML = user.name;
 	  	document.getElementById('editbio').innerHTML = user.bio;
 	  }
@@ -154,7 +152,7 @@ function popProfile(u) {
           if (user.image_url !== ''){
             console.log('hihihihihihihihi');
             profilePic.setAttribute('src', user.image_url);
-            profilePic.style.borderRadius = "50%";
+            profilePic.className = "profile-image";
             //test
 
             profileDiv.appendChild(profilePic);

@@ -27,7 +27,7 @@ const recipe_pic_storage = cloudinaryStorage({
 cloudinary: cloudinary,
 folder: "recipe_pics",
 allowedFormats: ["jpg", "png"],
-transformation: [{ width: 500, height: 500, crop: "limit"}]
+transformation: [{ width: 500, height: 700, crop: "limit"}]
 });
 
 const profile_parser = multer({ storage: profile_storage });
@@ -162,16 +162,42 @@ router.get('/feed', function(req, res) {
 
 router.post(
   '/newrecipe',
-  connect.ensureLoggedIn(),
+  connect.ensureLoggedIn(),recipe_parser.single("image"),
   function(req, res) {
+    if (req.file !== undefined){
     User.findOne({ _id: req.user._id },function(err,user) {
       const toPost = new Recipe({
-        'name': req.body.rt,
+        'name': req.body.title,
         'author': user._id,
         'authorname': user.name,
-        'description': req.body.rd,
-        'ingredients': req.body.ri,
-        'steps': req.body.rs,
+        'description': req.body.recipedescription,
+        'ingredients': req.body.ingredients,
+        'steps': req.body.steps,
+        'image_url': req.file.secure_url
+
+      });
+
+      user.recipes.push(toPost._id);
+      // user.set({ last_post: req.body.content });
+      user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
+
+      toPost.save(function(err,recipe) {
+        // configure socketio
+        if (err) console.log(err);
+      });
+
+      res.send({});
+    });
+  } else {
+        User.findOne({ _id: req.user._id },function(err,user) {
+      const toPost = new Recipe({
+        'name': req.body.title,
+        'author': user._id,
+        'authorname': user.name,
+        'description': req.body.recipedescription,
+        'ingredients': req.body.ingredients,
+        'steps': req.body.steps,
+
       });
 
       user.recipes.push(toPost._id);
@@ -186,11 +212,54 @@ router.post(
       res.send({});
     });
   }
+
+  }
 );
 
 
-router.post('/editrecipe', function(req, res) {
-  connect.ensureLoggedIn(),
+router.post('/editrecipe',  connect.ensureLoggedIn(), recipe_parser.single("image"),function(req, res) {
+  if (req.file !== undefined){
+  User.findOne({ _id: req.user._id }, function(err,user) {
+    const toPost = new Recipe({
+        'name': req.body.rt,
+        'author': user._id,
+        'authorname' :user.name,
+        'description': req.body.rd,
+        'ingredients': req.body.ri,
+        'steps': req.body.rs,
+        'image_url':req.file.secure_url
+      });
+
+      // user.recipes.addTOSet(recipe._id);
+      // user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
+      toPost.save(function(err,recipe) {
+        // configure socketio
+        if (err) console.log(err);
+      });
+
+      editId = toPost._id
+    user.recipes.push(editId);
+  // Recipe.findById(req.query.p, function(err, recipe) {
+  Recipe.findById(req.body.p, function(err, recipe) {
+    if (err) {
+          // handle the error
+          console.log("An error occured: ", err.message);
+    } else if (recipe=== null) {
+          // handler the case when no student in the database
+          // matches the given id
+          console.log("No recipe with the given id found.");
+    } else {
+          // this means we found the student under name "Aaron"
+          
+          recipe.forks.push(editId);
+          console.log(recipe.forks);
+          recipe.save()
+
+          res.send(recipe);
+    }
+  });
+  }); 
+} else {
   User.findOne({ _id: req.user._id }, function(err,user) {
     const toPost = new Recipe({
         'name': req.body.rt,
@@ -229,7 +298,8 @@ router.post('/editrecipe', function(req, res) {
           res.send(recipe);
     }
   });
-  });
+  }); 
+  }
 });
 
 
@@ -242,6 +312,25 @@ router.post('/editprofile', function(req, res) {
       user.save();
   });
   
+});
+
+router.post('/vote', function(req, res) {
+  connect.ensureLoggedIn(),
+  User.findOne({ _id: req.user._id }, function(err,user) {
+      if(req.body.type ==true){
+          user.upvoted.push(req.body.recipe);
+      } 
+      user.save();
+  
+  Recipe.findOne({_id: req.body.recipe},function(err, recipe){
+    if(req.body.type ==true){
+      recipe.upvotes.push(user._id);
+    } else {
+      recipe.downvotes.push(user._id);
+    }  
+    recipe.save();
+  });
+    });
 });
 
 router.post('/profilepic', connect.ensureLoggedIn(),  profile_parser.single("image"), function(req,res){
@@ -284,41 +373,5 @@ router.post('/profilepic', connect.ensureLoggedIn(),  profile_parser.single("ima
 //   });
 //   }
 // );
-
-router.post(
-  '/subscribe',
-  connect.ensureLoggedIn(),
-  function(req, res) {
-    console.log('i am trying to subscribe!!!');
-    User.findOne({ _id: req.user._id },function(err,user) {
-      user.following.push(req.body.id);
-      console.log('my following' + user.following);
-       user.save();
-      User.findOne({_id: req.body.id}, function(err,them) {
-        them.followers.push(req.user._id);
-        console.log('their followers' + them.followers);
-        them.save();
-      });
-    });
-  res.send({});
-});
-
-router.post(
-  '/unsubscribe',
-  connect.ensureLoggedIn(),
-  function(req, res) {
-    console.log('UNSUBSCRIBE >:(');
-    User.findOne({ _id: req.user._id },function(err,user) {
-      user.following.pull(req.body.id);
-      console.log('my following' + user.following);
-       user.save();
-      User.findOne({_id: req.body.id}, function(err,them) {
-        them.followers.pull(req.user._id);
-        console.log('their followers' + them.followers);
-        them.save();
-      });
-    });
-  res.send({});
-});
 
 module.exports = router;

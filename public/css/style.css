@@ -19,6 +19,8 @@ body {
   margin:auto;
 }
 
+
+
 .big-button{
 	background-color: #F6CBA7;
 	text-align: center;
@@ -112,13 +114,13 @@ body {
 
 /* profile page classes */
 .profile-image {
-	width: 250px;
-	height: 250px;
+	position: relative;
+	/*display: inline-block;*/
+	width: 200px;
+	height: 200px;
 	border-radius: 50%;
 	/*background-color: #F6CBA7;*/
-	margin-top: 25px;
-	margin-bottom: 0px;
-	margin-left: 20px;
+	margin: 20px;
 }
 
 .face {
@@ -202,6 +204,10 @@ body {
 .card-text{
 	font-size: 15px;
 	color: #485863;
+}
+
+.recipe-image{
+	border-radius: 2%
 }
 
 .section{

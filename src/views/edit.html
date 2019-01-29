@@ -26,14 +26,14 @@
 
 	<!-- recipe card -->
 	<div class="recipe-container flex-container center">
-		<form class="center">
+		<form action = "/api/editrecipe" class="center"  method="post" enctype="multipart/form-data">
 			<br><input id = "recipetitle" type="text" name="title" placeholder="add a title"><br>
 
 			<br><textarea id="recipedescription" placeholder="add a description!"></textarea><br>
-			<!-- <input type="file" name="fileupload" value="fileupload" id="fileupload"> -->
+			<input type="file" name="image" id="image"/>
 			<textarea placeholder="ingredients (name:quantity) separated by comma" name="ingredients" id="ingredients"></textarea> 
 			<textarea placeholder="steps, separated by comma" name="steps" id = "steps"></textarea>
-			<br><a id= "recipesubmit" href="#">submit</a></br>
+			<br><input type="submit" id= "recipesubmit" href="#"></br>
 			<!-- <br><input type="submit" name="submit" value="submit" id="submit"> submit!<br> -->
 		</form>
 	</div>
