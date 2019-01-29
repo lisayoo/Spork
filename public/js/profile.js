@@ -112,21 +112,23 @@ function popProfile(u) {
 	  	(document.getElementById('modal')).remove();
 
       if (user._id in currentUser.following) {
+        console.log('i am following this person');
+        const unsubButton = document.createElement('a');
+        unsubButton.setAttribute('href', '#');
+        unsubButton.className = 'big-button follow-button';
+        unsubButton.innerHTML = 'unsubscribe';
+        unsubButton.setAttribute('id', 'unsubscribe-button');
+        const subDiv = document.getElementById('subscribe-unsubscribe');
+        subDiv.appendChild(unsubButton);
+        // <a id = 'unsubscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> unsubscribe </a>
+      }
+      else {
         console.log('i am not following this person');
         const subButton = document.createElement('a');
         subButton.setAttribute('href', '#');
         subButton.className = 'big-button follow-button';
-        subButton.innerHTML = 'unsubscribe';
-        const subDiv = document.getElementById('subscribe-unsubscribe');
-        subDiv.appendChild(subButton);
-        // <a id = 'unsubscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> unsubscribe </a>
-      }
-      else {
-        console.log('i am following this person');
-        const subButton = document.createElement('a');
-        subButton.setAttribute('href', '#');
-        subButton.className = 'big-button follow-button';
         subButton.innerHTML = 'subscribe';
+        subButton.setAttribute('id', 'subscribe-button');
         const subDiv = document.getElementById('subscribe-unsubscribe');
         subDiv.appendChild(subButton);
         // <a id ='subscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> subscribe </a> 

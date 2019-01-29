@@ -23,7 +23,7 @@ function storyDOMObject(storyJSON) {
 }
 
 
-function renderStories(user) {
+function renderSubStories(user) {
   console.log('calling renderStories');
   const storiesDiv = document.getElementById('stories');
   console.log('made storiesDiv');
@@ -45,7 +45,7 @@ function renderStories(user) {
 
 function main() {
   get('/api/whoami', {}, function(user) {
-    renderStories(user);
+    renderSubStories(user);
   });
 }
 
