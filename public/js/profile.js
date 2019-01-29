@@ -78,7 +78,6 @@ function popProfile(u) {
   	currentUser = "";
   	get('/api/whoami', {}, function(user) {
   		currentUser = user;
-      console.log(user._id);
   	});
     get('/api/user', {_id: u}, function(user) {
     console.log("getting specific user from url");
@@ -86,9 +85,6 @@ function popProfile(u) {
     descDiv.innerHTML = user.bio;
     following.setAttribute('href', '/u/following?' + user._id);
     followers.setAttribute('href', '/u/followers?' + user._id);
-    console.log(following.href);
-    console.log(followers.href);
-
     if (user.image_url !== ''){
       // console.log('hihihihihihihihi');
 
@@ -99,9 +95,7 @@ function popProfile(u) {
     }
       //default profile image
     else{
-      console.log('this is logical i should be here');
       const defaultDiv = document.createElement('div');
-      defaultDiv.className = 'face';
       profileDiv.appendChild(defaultDiv);
     }
     if (user.recipes !== []){
@@ -116,20 +110,32 @@ function popProfile(u) {
 	  if (currentUser !== user){
 	  	(document.getElementById('editprofilebutton')).remove();
 	  	(document.getElementById('modal')).remove();
+
       if (user._id in currentUser.following) {
-        (document.getElementById('subscribe-button')).remove();
+        console.log('i am not following this person');
+        const subButton = document.createElement('a');
+        subButton.setAttribute('href', '#');
+        subButton.className = 'big-button follow-button';
+        subButton.innerHTML = 'unsubscribe';
+        const subDiv = document.getElementById('subscribe-unsubscribe');
+        subDiv.appendChild(subButton);
+        // <a id = 'unsubscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> unsubscribe </a>
       }
       else {
-        (document.getElementById('unsubscribe-button')).remove();
+        console.log('i am following this person');
+        const subButton = document.createElement('a');
+        subButton.setAttribute('href', '#');
+        subButton.className = 'big-button follow-button';
+        subButton.innerHTML = 'subscribe';
+        const subDiv = document.getElementById('subscribe-unsubscribe');
+        subDiv.appendChild(subButton);
+        // <a id ='subscribe-button' class="big-button follow-button" href='#' onClick="window.location.reload()"> subscribe </a> 
       }
       
       const profileContainer = document.getElementById('profile-container');
       const subscribe = document.createElement('a');
-      user.following.pop
 
 	  } else {
-      (document.getElementById('subscribe-button')).remove();
-      (document.getElementById('unsubscribe-button')).remove();
 	  	document.getElementById('profilesubmit').addEventListener('click', function(event){
 	  		submitNewProfile(user);
 	  		}

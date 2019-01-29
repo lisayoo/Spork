@@ -50,7 +50,7 @@ router.get('/user', function(req, res) {
 });
 
 router.get('/recipes', function(req, res) {
-  console.log("REQUEST RECIPE ID: " + req.query._id);
+  // console.log("REQUEST RECIPE ID: " + req.query._id);
   // {
   //   $graphLookup: {
   //   from: 'recipes', // Explore the movies collection
@@ -147,12 +147,7 @@ router.get('/followers', function(req, res) {
   });
 });
 
-// router.get('/followers', function(req, res) {
-//   console.log('getting list of followers');
-//   User.find({_id: { $in: req.query.followers }}, function(err, followers) {
-//     res.send(followers);
-//   });
-// });
+
 // router.get('/search', function(req, res) {
 //   User.find( {name: req.query.key}, function(err, results) {
 //     if (err) {
@@ -318,11 +313,11 @@ router.post(
   function(req, res) {
     console.log('i am trying to subscribe!!!');
     User.findOne({ _id: req.user._id },function(err,user) {
-      user.following.push(req.body.id);
+      user.following.addToSet(req.body.id);
       console.log('my following' + user.following);
        user.save();
       User.findOne({_id: req.body.id}, function(err,them) {
-        them.followers.push(req.user._id);
+        them.followers.addToSet(req.user._id);
         console.log('their followers' + them.followers);
         them.save();
       });
@@ -334,18 +329,20 @@ router.post(
   '/unsubscribe',
   connect.ensureLoggedIn(),
   function(req, res) {
-    console.log('UNSUBSCRIBE >:(');
-    User.findOne({ _id: req.user._id },function(err,user) {
-      user.following.pull(req.body.id);
-      console.log('my following' + user.following);
-       user.save();
-      User.findOne({_id: req.body.id}, function(err,them) {
-        them.followers.pull(req.user._id);
-        console.log('their followers' + them.followers);
-        them.save();
-      });
-    });
+    console.log('UNSUBSCRIBE >:(1111111');
+    console.log('req.user._id' + req.user._id);
+    console.log('req.body,id' + req.body.id);
+
+    User.findOneAndUpdate( { _id: req.user._id}, { $pullAll: { following: [req.body.id] } }, { new: true }, 
+      function(err, data) {} 
+    );
+
+    console.log('hi');
+    User.findOneAndUpdate( { _id: req.body.id}, { $pullAll: { followers: [req.user._id]}}, { new: true },
+      function(err, data) {}
+    );
   res.send({});
 });
+
 
 module.exports = router;

@@ -28,10 +28,12 @@ function unsubscribe() {
 			'id' : subscription
 		};
 		post('/api/unsubscribe', data);
+		// post('/api/unsubscribe2', data);
   	});
 }
 
 let subscribeButton = document.getElementById("subscribe-button");
 subscribeButton.addEventListener("click", subscribe);
 let unsubscribeButton = document.getElementById("unsubscribe-button");
-unsubscribeButton.addEventListener("clicke", unsubscribe);
+unsubscribeButton.addEventListener("click", unsubscribe);
+// unsubscribeButton.addEventListener("click", unsubscribe2);
